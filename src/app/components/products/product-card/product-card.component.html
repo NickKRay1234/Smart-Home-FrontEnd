@@ -1,0 +1,27 @@
+<div class="product__card">
+  @for (product of products(); track $index) {
+  <div class="product__item">
+    <div class="product__image">
+      <img
+        class="product__item-image"
+        [src]="product.images[0].imageUrl"
+        alt=""
+      />
+      <div class="product__discount">{{ product.productDiscount }} %</div>
+    </div>
+    <p class="product__desription">
+      {{ product.productDescription | cutString }}
+    </p>
+    <div class="product__price">
+      <div class="product__likes">stars</div>
+      <div class="product__price-item">
+        <p class="price">{{ product.productPrice }}</p>
+        <p class="discount">{{ product.priceWithDiscount }}</p>
+      </div>
+    </div>
+    <div class="product__button">
+      <button class="btn">До кошика</button>
+    </div>
+  </div>
+  }
+</div>

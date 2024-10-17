@@ -1,0 +1,41 @@
+<div class="products">
+  <app-product-slider />
+
+  <div class="products__items">
+    <div class="products__nav">
+      <p class="products__nav__tittle">Супер знижки</p>
+      <button class="btn">
+        <p>Більше</p>
+        <p>></p>
+      </button>
+    </div>
+    <div class="products__cards">
+      @if (productsDiscount()?.length) {
+
+      <app-product-card [products]="productsDiscount()" />
+      } @else {
+      <h1>Loading ...</h1>
+      }
+    </div>
+  </div>
+  <div class="products__items">
+    <div class="products__nav">
+      <p class="products__nav__tittle">Новинки року</p>
+      <button class="btn">
+        <p>Більше</p>
+        <p>></p>
+      </button>
+    </div>
+    <app-product-card [products]="productsNew()" />
+  </div>
+  <div class="products__items">
+    <div class="products__nav">
+      <p class="products__nav__tittle">Найкраще для вас</p>
+      <button class="btn">
+        <p>Більше</p>
+        <p>></p>
+      </button>
+    </div>
+    <app-product-card [products]="productsBest()" />
+  </div>
+</div>
