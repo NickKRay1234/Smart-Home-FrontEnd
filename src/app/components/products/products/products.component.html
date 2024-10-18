@@ -1,41 +1,53 @@
 <div class="products">
   <app-product-slider />
 
-  <div class="products__items">
+  <section class="products__items">
     <div class="products__nav">
-      <p class="products__nav__tittle">Супер знижки</p>
-      <button class="btn">
+      <h1 class="products__nav__tittle">Супер знижки</h1>
+      <button class="btn" (click)="moreDiscount()">
         <p>Більше</p>
         <p>></p>
       </button>
     </div>
     <div class="products__cards">
-      @if (productsDiscount()?.length) {
+      @if (products.length) {
 
-      <app-product-card [products]="productsDiscount()" />
+      <app-product-card
+        [productsInput]="products"
+        [start]="startDisc"
+        [end]="endDisc"
+      />
       } @else {
       <h1>Loading ...</h1>
       }
     </div>
-  </div>
-  <div class="products__items">
+  </section>
+  <section class="products__items">
     <div class="products__nav">
-      <p class="products__nav__tittle">Новинки року</p>
-      <button class="btn">
+      <h1 class="products__nav__tittle">Новинки року</h1>
+      <button class="btn" (click)="moreNew()">
         <p>Більше</p>
         <p>></p>
       </button>
     </div>
-    <app-product-card [products]="productsNew()" />
-  </div>
-  <div class="products__items">
+    <app-product-card
+      [productsInput]="products"
+      [start]="startNew"
+      [end]="endNew"
+    />
+  </section>
+  <section class="products__items">
     <div class="products__nav">
-      <p class="products__nav__tittle">Найкраще для вас</p>
-      <button class="btn">
+      <h1 class="products__nav__tittle">Найкраще для вас</h1>
+      <button class="btn" (click)="moreBest()">
         <p>Більше</p>
         <p>></p>
       </button>
     </div>
-    <app-product-card [products]="productsBest()" />
-  </div>
+    <app-product-card
+      [productsInput]="products"
+      [start]="startBest"
+      [end]="endBest"
+    />
+  </section>
 </div>

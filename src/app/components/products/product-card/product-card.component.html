@@ -1,5 +1,5 @@
 <div class="product__card">
-  @for (product of products(); track $index) {
+  @for (product of products; track $index) {
   <div class="product__item">
     <div class="product__image">
       <img
@@ -7,7 +7,9 @@
         [src]="product.images[0].imageUrl"
         alt=""
       />
+      @if (product.productDiscount) {
       <div class="product__discount">{{ product.productDiscount }} %</div>
+      }
     </div>
     <p class="product__desription">
       {{ product.productDescription | cutString }}
@@ -15,7 +17,9 @@
     <div class="product__price">
       <div class="product__likes">stars</div>
       <div class="product__price-item">
+        @if (product.productDiscount) {
         <p class="price">{{ product.productPrice }}</p>
+        }
         <p class="discount">{{ product.priceWithDiscount }}</p>
       </div>
     </div>

@@ -4,15 +4,9 @@ import { ProductService } from '../../../core/services/product.service';
 import { ProductSliderComponent } from '../product-slider/product-slider.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { AsyncPipe } from '@angular/common';
-import { Product } from '../../../shared/models/product/product';
-import { resourceUsage } from 'process';
+import { Product } from '@shared/models/product/product';
+import { slide } from '@shared/tools/slide';
 import { tap } from 'rxjs';
-
-const sortFn = (a: any, b: any) => {
-  if (a < b) return -1;
-  if (a > b) return 1;
-  return 0;
-};
 
 @Component({
   selector: 'app-products',
@@ -26,35 +20,48 @@ export class ProductsComponent {
   private productService = inject(ProductService);
   private destroyRef = inject(DestroyRef);
   products!: Product[];
+  private slideDiscount: any;
+  private slideNew: any;
+  private slideBest: any;
+  private step = 5;
+
+  startDisc = 0;
+  endDisc = this.step;
+  startNew = 0;
+  endNew = this.step;
+  startBest = 0;
+  endBest = this.step;
 
   constructor() {
     this.productService
       .getProducts()
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((prod) => {
+          this.slideDiscount = slide(prod.length, this.step);
+          this.slideBest = slide(prod.length, this.step);
+          this.slideNew = slide(prod.length, this.step);
+        })
+      )
       .subscribe((prod: Product[]) => (this.products = prod));
   }
 
-  productsDiscount(): Product[] | null {
-    if (this.products?.length) {
-      const products = this.products
-        .filter((product: Product) => product.productDiscount > 0)
-        .slice(0, 5);
-      return products;
-    }
-    return null;
+  moreDiscount(): void {
+    const { start, end } = this.slideDiscount();
+    console.log('moreDiscount', start, end);
+    this.startDisc = start;
+    this.endDisc = end;
   }
 
-  productsNew(): Product[] | null {
-    if (this.products?.length) {
-      return this.products.slice(0, 5);
-    }
-    return null;
+  moreNew(): void {
+    const { start, end } = this.slideNew();
+    this.startNew = start;
+    this.endNew = end;
   }
 
-  productsBest(): Product[] | null {
-    if (this.products?.length) {
-      return this.products.slice(0, 5);
-    }
-    return null;
+  moreBest(): void {
+    const { start, end } = this.slideBest();
+    this.startBest = start;
+    this.endBest = end;
   }
 }
