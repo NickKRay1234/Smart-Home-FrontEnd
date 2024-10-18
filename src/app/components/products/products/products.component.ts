@@ -48,7 +48,6 @@ export class ProductsComponent {
 
   moreDiscount(): void {
     const { start, end } = this.slideDiscount();
-    console.log('moreDiscount', start, end);
     this.startDisc = start;
     this.endDisc = end;
   }

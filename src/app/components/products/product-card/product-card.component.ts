@@ -23,12 +23,5 @@ export class ProductCardComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.products = this.productsInput()?.slice(this.start(), this.end());
-
-    for (const change in changes) {
-      const current = changes[change].currentValue;
-      if (!isNaN(current)) {
-        console.log(current);
-      }
-    }
   }
 }
