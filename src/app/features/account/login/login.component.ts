@@ -1,11 +1,11 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, NgZone, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { AccountService } from '../../../core/services/account.service';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginRequest } from '../../../shared/models/account/login-request.model';
-import { ExternalAuth } from '../../../shared/models/account/external-auth.model';
-import { HttpErrorResponse } from '@angular/common/http';
+import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private authService = inject(AccountService);
   private cookies = inject(SsrCookieService);
   private router = inject(Router);
@@ -25,12 +25,31 @@ export class LoginComponent {
   errorMessage: string = '';
   showError: boolean = false;
 
-  constructor() {
+  constructor(private _ngZone: NgZone) {
     const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
     if (url) this.returnUrl = url;
     this.model = {
       email: '', password: '', clientURI: ''
     };
+  }
+
+  ngOnInit(): void {
+    // @ts-ignore 
+    google.accounts.id.initialize({
+      client_id: environment.clientId,
+      callback: this.handleCredentialResponse.bind(this),
+      auto_select: false,
+      cancel_on_tap_outside: true,
+      use_fedcm_for_prompt: true
+    });
+    // @ts-ignore
+    google.accounts.id.renderButton(
+      // @ts-ignore
+      document.getElementById('google'),
+      { type: 'icon', theme: "outline", size: "medium", shape: 'pill' }
+    );
+    // @ts-ignore
+    google.accounts.id.prompt((notification: PromptMomentNotification) => { });
   }
 
   onFormSubmit() {
@@ -48,35 +67,23 @@ export class LoginComponent {
     });
   }
 
-  externalLogin = () => {
-    this.showError = false;
-    this.authService.signInGoogle();
-    const externalAuth: ExternalAuth = {
-      provider: 'Google',
-      idToken: this.authService.getToken()
-    };
-    // this.validateExternalAuth(externalAuth);
-    this.cookies.set('test', externalAuth.idToken);
+   async handleCredentialResponse(response: CredentialResponse) {
+    this.authService.externalLogin({
+       idToken: response.credential,
+       provider: "google"
+     }).subscribe({
+       next: (resp) => {
+         this.cookies.set('Authorization', `Bearer ${resp.token}`, undefined, '/', undefined, true, 'Strict');
+         this.authService.sendAuthStateChangeNotification(resp.isAuthSuccessful);
+         this.authService.getUserInfo().subscribe({
+           next: (user) => {
+             this.authService.setStorageUser(user);
+           }
+         });
+         this._ngZone.run(() => {
+           this.router.navigateByUrl(this.returnUrl);
+         });
+       }
+     });
   }
-
-  // private validateExternalAuth(externalAuth: ExternalAuth) {
-  //   this.authService.externalLogin(externalAuth).subscribe({
-  //     next: (response) => {
-  //       this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
-  //       this.authService.sendAuthStateChangeNotification(response.isAuthSuccessful);
-  //       this.authService.getUserInfo().subscribe({
-  //         next: (user) => {
-  //           this.authService.setStorageUser(user);
-  //         }
-  //       });
-  //       this.router.navigateByUrl(this.returnUrl);
-  //     },
-
-  //     error: (err: HttpErrorResponse) => {
-  //       this.errorMessage = err.message;
-  //       this.showError = true;
-  //       this.authService.signOutExternal();
-  //     }
-  //   });
-  // }
 }

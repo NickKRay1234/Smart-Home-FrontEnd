@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, NgZone, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AccountService } from '../core/services/account.service';
 import { User } from '../shared/models/account/user';
@@ -12,6 +12,7 @@ import { User } from '../shared/models/account/user';
 })
 export class HeaderComponent implements OnInit {  
 
+  constructor(private _ngZone: NgZone) {}
   user?: User;
 
   ngOnInit(): void {
@@ -29,6 +30,8 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.router.navigateByUrl('/');
+    this._ngZone.run(() => {
+      this.router.navigate(['/']).then(() => window.location.reload())
+    })
   }
 }
