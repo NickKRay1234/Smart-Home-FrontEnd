@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { SessionStorageService } from 'ngx-webstorage';
 import { environment } from '../../../environments/environment.development';
@@ -10,7 +10,6 @@ import { LoginRequest } from '../../shared/models/account/login-request.model';
 import { LoginResponse } from '../../shared/models/account/login-response.model';
 import { User } from '../../shared/models/account/user';
 import { ExternalAuth } from '../../shared/models/account/external-auth.model';
-import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +19,15 @@ export class AccountService {
   private session = inject(SessionStorageService);
   private http = inject(HttpClient);
   private location = inject(Location);
-  private oAuthService = inject(OAuthService);
 
   private authChangeSub = new Subject<boolean>();
   
   authChanged = this.authChangeSub.asObservable();
   isExternalAuth: boolean = false;
 
-  baseUrl = environment.apiUrl;
+  private baseUrl = environment.apiUrl;
   $user = new BehaviorSubject<User | undefined>(undefined);
   token: string = '';
-
-  constructor() {
-    this.initConfig();
-  }
 
   sendAuthStateChangeNotification = (isAuthenticated: boolean) => {
     this.authChangeSub.next(isAuthenticated);
@@ -106,41 +100,5 @@ export class AccountService {
     this.session.clear();
     this.$user.next(undefined);
     this.sendAuthStateChangeNotification(false);
-  }
-
-  //Google OAuth Config:
-
-  private initConfig() {
-    const authConfig: AuthConfig = {
-      issuer: 'https://accounts.google.com',
-      strictDiscoveryDocumentValidation: false,
-      redirectUri: 'https://smarthome-team.store/account/handler',
-      clientId: environment.clientId,
-      scope: 'openid profile email',
-    };
-
-    this.oAuthService.configure(authConfig);
-    this.oAuthService.loadDiscoveryDocument();
-    // this.oAuthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-    //   if (this.oAuthService.hasValidIdToken()) {
-    //     this.token = this.oAuthService.getIdToken();
-    //     this.cookies.set('google', this.token);
-    //   }
-    // });
-    this.oAuthService.setupAutomaticSilentRefresh();
-  }
-
-  signInGoogle() {
-    this.oAuthService.initLoginFlow();
-  }
-
-  getToken() {
-    return this.oAuthService.getIdToken();
-  }
-
-  signOutExternal() {
-
-    this.oAuthService.revokeTokenAndLogout();
-    this.oAuthService.logOut();
   }
 }

@@ -6,10 +6,4 @@ export const accountRoutes: Routes = [
     loadComponent: () =>
       import('./login/login.component').then((mod) => mod.LoginComponent),
   },
-
-  {
-    path: 'handler',
-    loadComponent: () =>
-      import('./handler/handler.component').then((mod) => mod.HandlerComponent),
-  },
 ];
