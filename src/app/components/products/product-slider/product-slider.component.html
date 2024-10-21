@@ -1,1 +1,15 @@
-<div class="slider__container"></div>
+<div class="slider__container">
+  <div class="slider__wrapper">
+    <div class="slider__content"></div>
+    <div class="slider__image"></div>
+  </div>
+  <div class="slider__nav">
+    @for (item of [1, 2, 3]; track $index) {
+    <div
+      class="slider__nav-item"
+      (click)="isActive($index)"
+      [ngClass]="{ 'slider__nav-item__active': true }"
+    ></div>
+    }
+  </div>
+</div>

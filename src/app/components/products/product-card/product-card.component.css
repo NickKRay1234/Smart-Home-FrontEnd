@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Tenor+Sans&display=swap');
-
 .product__card {
   display: flex;
   justify-content: space-around;
@@ -34,8 +31,8 @@
 .product__item-image {
   width: 180px;
   height: 140px;
+  border-radius: 14px;
 }
-
 
 .product__price {
   display: flex;
@@ -54,7 +51,6 @@
 }
 
 .product__button {
-
   padding-bottom: 20px;
 }
 
@@ -71,13 +67,12 @@
   font-size: 16px;
   line-height: 19px;
   color: #000;
-  background-image: linear-gradient(to left, #FF9E9E, #FADC93);
+  background-image: linear-gradient(to left, #ff9e9e, #fadc93);
 }
 
 .product__image {
   position: relative;
 }
-
 
 .product__discount {
   position: absolute;
@@ -89,5 +84,31 @@
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
   border-bottom-right-radius: 14px;
-  background: #94D397;
+  background: #94d397;
+}
+
+.product__like {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.arrow__left {
+  left: 4px;
+}
+
+.arrow__right {
+  right: 4px;
+}
+
+.arrow__left,
+.arrow__right {
+  position: absolute;
+  cursor: pointer;
+  width: 7px;
+  height: 14px;
+  top: 63px;
 }
