@@ -3,6 +3,10 @@
 }
 
 .slider__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
   border-radius: 40px;
   width: 1200px;
   height: 350px;
@@ -22,8 +26,69 @@
   height: 10px;
   border-radius: 20px;
   background: #d6cde0;
+  cursor: pointer;
 }
 
 .slider__nav-item__active {
   background: #c4a8db;
+}
+
+.slider__image > img {
+  height: 350px;
+}
+
+.slider__content {
+  display: flex;
+  padding-left: 60px;
+  padding-top: 20px;
+  flex-direction: column;
+}
+
+.slider__content > h1,
+.price__discount {
+  max-width: 532px;
+  font-family: Jura;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42.59px;
+}
+
+.price__percent-disc {
+  font-family: Jura;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 113.57px;
+  color: #0ee606;
+}
+
+.price__line-through {
+  font-family: Jura;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 30.76px;
+  padding-top: 22px;
+  color: #91a0a5;
+}
+
+.price__wrapper {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.line__one,
+.line__two {
+  position: absolute;
+  width: 121px;
+  border-bottom: 2px solid #e69779;
+}
+
+.line__one {
+  transform: rotate(160deg);
+  top: 35px;
+  left: 0;
+}
+
+.line__two {
+  transform: rotate(17deg);
+  top: 35px;
 }

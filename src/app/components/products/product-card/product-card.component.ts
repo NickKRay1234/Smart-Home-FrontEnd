@@ -5,7 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Product } from '../../../shared/models/product/product';
+import { Product } from '@shared/models/product/product';
 import { CutStringPipe } from '../../../core/pipes/cut-string.pipe';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
 
@@ -21,6 +21,7 @@ export class ProductCardComponent implements OnChanges {
   start: InputSignal<number> = input.required();
   end: InputSignal<number> = input.required();
   products: Product[] = [];
+  currentImage = 0;
   heart = '/assets/images/svg/heart.svg';
   arrowLeft = '/assets/images/svg/left-arrow.svg';
   arrowRight = '/assets/images/svg/right-arrow.svg';
@@ -30,10 +31,18 @@ export class ProductCardComponent implements OnChanges {
   }
 
   slideLeft(idx: number) {
-    if (idx - 1 >= 0) {
-      this.products[1].images;
+    if (this.currentImage - 1 >= 1) {
+      this.currentImage -= 1;
+    } else {
+      this.currentImage = this.products[idx].images.length - 1;
     }
   }
 
-  slideRight(idx: number) {}
+  slideRight(idx: number) {
+    if (this.currentImage + 1 < this.products[idx].images.length) {
+      this.currentImage += 1;
+    } else {
+      this.currentImage = 0;
+    }
+  }
 }

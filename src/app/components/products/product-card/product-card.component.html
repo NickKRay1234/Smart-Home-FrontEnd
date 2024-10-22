@@ -4,8 +4,8 @@
     <div class="product__image">
       <img
         class="product__item-image"
-        [src]="product.images[0].imageUrl"
-        alt=""
+        [src]="product.images[currentImage].imageUrl"
+        alt="product image"
       />
       @if (product.productDiscount) {
       <div class="product__discount">{{ product.productDiscount }} %</div>

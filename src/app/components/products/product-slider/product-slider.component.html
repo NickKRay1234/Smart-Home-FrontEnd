@@ -1,14 +1,29 @@
 <div class="slider__container">
   <div class="slider__wrapper">
-    <div class="slider__content"></div>
-    <div class="slider__image"></div>
+    <div class="slider__content">
+      <h1>{{ advCurrentProduct.tittle }}</h1>
+      <p class="price__percent-disc">-{{ advCurrentProduct.discount }}%</p>
+      <div class="price__wrapper">
+        <p class="price__line-through">
+          {{ advCurrentProduct.price | price }}&#8372;
+        </p>
+        <div class="line__one"></div>
+        <div class="line__two"></div>
+      </div>
+      <p class="price__discount">
+        {{ advCurrentProduct.discountPrice | price }}&#8372;
+      </p>
+    </div>
+    <div class="slider__image">
+      <img [src]="advCurrentProduct.image" alt="" />
+    </div>
   </div>
   <div class="slider__nav">
-    @for (item of [1, 2, 3]; track $index) {
+    @for (item of advProducts; track $index) {
     <div
       class="slider__nav-item"
       (click)="isActive($index)"
-      [ngClass]="{ 'slider__nav-item__active': true }"
+      [ngClass]="{ 'slider__nav-item__active': selectedIdx === $index }"
     ></div>
     }
   </div>

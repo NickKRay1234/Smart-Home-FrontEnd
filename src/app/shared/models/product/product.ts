@@ -12,7 +12,7 @@ export interface Product {
   images: Images[];
 }
 
-interface Categories {
+export interface Categories {
   categoryId: number;
   categoryName: string;
   url: string;
@@ -20,7 +20,7 @@ interface Categories {
   products: string[];
 }
 
-interface Images {
+export interface Images {
   imageId: number;
   filename: string;
   fileExtension: string;
@@ -30,14 +30,14 @@ interface Images {
   productId: number;
 }
 
-interface Characteristics {
+export interface Characteristics {
   characteristicId: number;
   productCharacteristicName: string;
   productCharacteristicDescription: string;
   productId: number;
 }
 
-interface Comments {
+export interface Comments {
   commentId: number;
   commentText: string;
   commentUsername: string;

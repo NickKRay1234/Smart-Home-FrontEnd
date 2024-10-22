@@ -15,7 +15,7 @@
   background: #fff;
   border-radius: 24px;
   width: 200px;
-  height: 360px;
+  max-height: 360px;
   padding: 20px 10px 10px 10px;
   align-items: center;
 }
@@ -51,7 +51,7 @@
 }
 
 .product__button {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .btn {
@@ -68,6 +68,11 @@
   line-height: 19px;
   color: #000;
   background-image: linear-gradient(to left, #ff9e9e, #fadc93);
+}
+
+.btn:hover {
+  border: 2px solid;
+  border-image: linear-gradient(#f5fc17, #91d7cf);
 }
 
 .product__image {
