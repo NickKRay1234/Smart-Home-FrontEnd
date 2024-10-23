@@ -1,17 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Tenor+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Tenor+Sans&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background-color: #faf5ea;
 }
 
+/* common style for buttons */
 .btn {
+  border: none;
+  border-radius: 44px;
+  padding: 10px 20px;
+  min-width: 106px;
+  min-height: 43px;
   cursor: pointer;
+}
+/* style for primary buttons */
+.btn__primary {
+  font-family: "Tenor Sans";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000;
+  background-image: linear-gradient(to left, #ff9e9e, #fadc93);
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn__primary:hover {
+  z-index: 100;
+  border-radius: 40px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to left, #91d7cf, #f5fc17);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.3),
+    0 8px 12px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn__primary:active {
+  border: none;
+  background-image: linear-gradient(to left, #fafe0f, #a8dbaa);
+}
+
+.btn__primary__disabled {
+  border: none;
+  background-image: linear-gradient(#d0d4d8, #d0d4d8);
+  color: #91a0a5;
 }

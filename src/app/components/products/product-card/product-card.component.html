@@ -1,6 +1,10 @@
 <div class="product__card">
   @for (product of products; track $index) {
-  <div class="product__item">
+  <div
+    class="product__item"
+    (mouseenter)="onMouseEnter($index)"
+    (mouseleave)="onMouseLeave($index)"
+  >
     <div class="product__image">
       <img
         class="product__item-image"
@@ -26,15 +30,18 @@
     <div class="product__price">
       <div class="product__likes">stars</div>
       <div class="product__price-item">
-        @if (product.productDiscount) {
+        @if(product.productDiscount) {
         <p class="price">{{ product.productPrice }}</p>
         }
         <p class="discount">{{ product.priceWithDiscount }}</p>
       </div>
     </div>
+    <!-- @if(currentIdx && $index === currentIdx) { -->
+
     <div class="product__button">
-      <button class="btn">До кошика</button>
+      <button class="btn btn__primary">До кошика</button>
     </div>
+    <!-- } -->
   </div>
   }
 </div>
