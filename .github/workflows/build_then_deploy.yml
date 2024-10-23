@@ -19,6 +19,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: latest
+    
+      - run: node server.js
+        env:
+          XXX: '${{ secrets.XXX }}'
 
       - name: Install dependencies
         run: npm install
