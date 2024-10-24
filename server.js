@@ -5,7 +5,7 @@ const path = require('path');
 const dir = "src/environments";
 const file = "environment.ts";
 
-const content = `${process.env.XXX}`;
+const content = `${process.env.FRONTEND}`;
 
 fs.access(dir, fs.constants.F_OK, (err) => {
     if (err) {

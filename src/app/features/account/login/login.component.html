@@ -15,6 +15,9 @@
           placeholder="Електронна пошта"
           [(ngModel)]="model.email"
         />
+        @if (showError) {
+        <div class="alert">{{ errorMessage }}</div>
+        }
         <input
           type="password"
           name="pwd"
@@ -22,6 +25,9 @@
           placeholder="Пароль"
           [(ngModel)]="model.password"
         />
+        @if (showError) {
+        <div class="alert">{{ errorMessage }}</div>
+        }
         <button class="login" (click)="onFormSubmit()">Увійти</button>
       </form>
 

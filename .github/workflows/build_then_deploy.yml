@@ -2,7 +2,7 @@ name: Build & Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,11 +18,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: 'lts/*'
+          check-latest: true
     
       - run: node server.js
         env:
-          XXX: '${{ secrets.XXX }}'
+          FRONTEND: '${{ secrets.FRONTEND }}'
 
       - name: Install dependencies
         run: npm install
