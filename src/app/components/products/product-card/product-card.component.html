@@ -11,9 +11,9 @@
         [src]="product.images[currentImage].imageUrl"
         alt="product image"
       />
-      @if (product.productDiscount) {
+      <!-- @if (product.productDiscount) { -->
       <div class="product__discount">{{ product.productDiscount }} %</div>
-      }
+      <!-- } -->
       <div class="product__like">
         <app-svg-icon [path]="heart" />
       </div>

@@ -9,7 +9,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  min-width: 1200px;
+  width: 1200px;
 }
 
 .products__items {
@@ -50,5 +50,17 @@
 @media (max-width: 1280px) {
   .products__items {
     padding: 0 20px;
+    width: 704px;
+    align-items: center;
+  }
+
+  .products__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .products__nav {
+    width: 704px;
   }
 }

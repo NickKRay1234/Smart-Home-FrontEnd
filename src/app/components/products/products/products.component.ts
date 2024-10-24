@@ -32,15 +32,8 @@ export class ProductsComponent {
   startBest = 0;
   endBest = this.step;
 
-  @HostListener('window:resize', ['$event']) onResize(event: Event) {
-    const width = window.innerWidth;
-    if (width > 744) {
-      this.step = 5;
-    } else if (width > 320) {
-      this.step = 3;
-    } else {
-      this.step = 2;
-    }
+  @HostListener('window:resize') onResize() {
+    this.resize(this.products);
   }
 
   constructor() {
@@ -49,12 +42,30 @@ export class ProductsComponent {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         tap((prod) => {
-          this.slideDiscount = slide(prod.length, this.step);
-          this.slideBest = slide(prod.length, this.step);
-          this.slideNew = slide(prod.length, this.step);
+          this.resize(prod);
         })
       )
       .subscribe((prod: Product[]) => (this.products = prod));
+  }
+
+  resize(prod: Product[]) {
+    const width = window.innerWidth;
+    if (width > 1280) {
+      this.step = 5;
+      this.slideDiscount = slide(prod.length, this.step);
+      this.slideBest = slide(prod.length, this.step);
+      this.slideNew = slide(prod.length, this.step);
+    } else if (width > 744) {
+      this.step = 3;
+      this.slideDiscount = slide(prod.length, this.step);
+      this.slideBest = slide(prod.length, this.step);
+      this.slideNew = slide(prod.length, this.step);
+    } else {
+      this.step = 2;
+      this.slideDiscount = slide(prod.length, this.step);
+      this.slideBest = slide(prod.length, this.step);
+      this.slideNew = slide(prod.length, this.step);
+    }
   }
 
   moreDiscount(): void {
