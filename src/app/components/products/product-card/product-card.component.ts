@@ -23,6 +23,7 @@ export class ProductCardComponent implements OnChanges {
   productsInput: InputSignal<Product[]> = input.required();
   start: InputSignal<number> = input.required();
   end: InputSignal<number> = input.required();
+
   products: Product[] = [];
   currentImage = 0;
   currentIdx: number | null = null;

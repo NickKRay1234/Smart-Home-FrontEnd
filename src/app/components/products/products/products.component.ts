@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, HostListener, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductService } from '../../../core/services/product.service';
 import { ProductSliderComponent } from '../product-slider/product-slider.component';
@@ -19,11 +19,11 @@ import { tap } from 'rxjs';
 export class ProductsComponent {
   private productService = inject(ProductService);
   private destroyRef = inject(DestroyRef);
-  products!: Product[];
   private slideDiscount: any;
   private slideNew: any;
   private slideBest: any;
   private step = 5;
+  products!: Product[];
 
   startDisc = 0;
   endDisc = this.step;
@@ -31,6 +31,17 @@ export class ProductsComponent {
   endNew = this.step;
   startBest = 0;
   endBest = this.step;
+
+  @HostListener('window:resize', ['$event']) onResize(event: Event) {
+    const width = window.innerWidth;
+    if (width > 744) {
+      this.step = 5;
+    } else if (width > 320) {
+      this.step = 3;
+    } else {
+      this.step = 2;
+    }
+  }
 
   constructor() {
     this.productService

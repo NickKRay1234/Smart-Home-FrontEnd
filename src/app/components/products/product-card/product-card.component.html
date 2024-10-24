@@ -36,12 +36,11 @@
         <p class="discount">{{ product.priceWithDiscount }}</p>
       </div>
     </div>
-    <!-- @if(currentIdx && $index === currentIdx) { -->
-
+    @if(currentIdx !== null && $index === currentIdx ) {
     <div class="product__button">
       <button class="btn btn__primary">До кошика</button>
     </div>
-    <!-- } -->
+    }
   </div>
   }
 </div>
