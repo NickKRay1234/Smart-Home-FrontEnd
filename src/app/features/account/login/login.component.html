@@ -9,7 +9,13 @@
         <div class="container">
             <form class="login-form" #form="ngForm">
                 <input type="email" name="email" id="email" placeholder="Електронна пошта" [(ngModel)]="model.email">
+                @if (showError) {
+                    <div class="alert">{{errorMessage}}</div>
+                }
                 <input type="password" name="pwd" id="pwd" placeholder="Пароль" [(ngModel)]="model.password">
+                @if (showError) {
+                    <div class="alert">{{errorMessage}}</div>
+                }
                 <button class="login" (click)="onFormSubmit()">Увійти</button>
             </form>
 

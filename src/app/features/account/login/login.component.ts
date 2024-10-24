@@ -5,7 +5,7 @@ import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginRequest } from '../../../shared/models/account/login-request.model';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   returnUrl = '';
   model: LoginRequest;
-  errorMessage: string = '';
+  errorMessage: any;
   showError: boolean = false;
 
   constructor(private _ngZone: NgZone) {
@@ -56,6 +56,11 @@ export class LoginComponent implements OnInit {
     this.authService.isExternalAuth = false;
     this.authService.login(this.model).subscribe({
       next: (response) => {
+        if (response.isAuthSuccessful = false) {
+          this.showError = true;
+          this.errorMessage = response.errorMessage;
+        }
+
         this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
         this.authService.getUserInfo().subscribe({
           next: (user) => {
@@ -73,6 +78,11 @@ export class LoginComponent implements OnInit {
        provider: "google"
      }).subscribe({
        next: (resp) => {
+        if (resp.isAuthSuccessful = false) {
+          this.showError = true;
+          this.errorMessage = resp.errorMessage;
+        }
+
          this.cookies.set('Authorization', `Bearer ${resp.token}`, undefined, '/', undefined, true, 'Strict');
          this.authService.sendAuthStateChangeNotification(resp.isAuthSuccessful);
          this.authService.getUserInfo().subscribe({
