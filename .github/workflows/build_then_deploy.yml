@@ -22,7 +22,7 @@ jobs:
     
       - run: node server.js
         env:
-          XXX: '${{ secrets.XXX }}'
+          FRONTEND: '${{ secrets.FRONTEND }}'
 
       - name: Install dependencies
         run: npm install
