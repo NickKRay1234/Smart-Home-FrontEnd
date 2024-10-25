@@ -1,4 +1,13 @@
-import { Component, DestroyRef, HostListener, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  effect,
+  HostListener,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductService } from '../../../core/services/product.service';
 import { ProductSliderComponent } from '../product-slider/product-slider.component';
@@ -7,6 +16,7 @@ import { AsyncPipe } from '@angular/common';
 import { Product } from '@shared/models/product/product';
 import { slide } from '@shared/tools/slide';
 import { tap } from 'rxjs';
+import { withDebugTracing } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -16,13 +26,14 @@ import { tap } from 'rxjs';
   styleUrl: './products.component.css',
   providers: [ProductService],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   private productService = inject(ProductService);
   private destroyRef = inject(DestroyRef);
   private slideDiscount: any;
   private slideNew: any;
   private slideBest: any;
   private step = 5;
+
   products!: Product[];
 
   startDisc = 0;
@@ -33,23 +44,28 @@ export class ProductsComponent {
   endBest = this.step;
 
   @HostListener('window:resize') onResize() {
-    this.resize(this.products);
+    if (window?.innerWidth) {
+      this.resize(this.products, window.innerWidth);
+      this.moreDiscount();
+      this.moreNew();
+      this.moreBest();
+    }
+  }
+  @HostListener('window:load') onLoad() {
+    this.resize(this.products, window.innerWidth);
+    this.moreDiscount();
+    this.moreNew();
+    this.moreBest();
   }
 
-  constructor() {
+  ngOnInit(): void {
     this.productService
       .getProducts()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        tap((prod) => {
-          this.resize(prod);
-        })
-      )
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((prod: Product[]) => (this.products = prod));
   }
 
-  resize(prod: Product[]) {
-    const width = window.innerWidth;
+  resize(prod: Product[], width: number) {
     if (width > 1280) {
       this.step = 5;
       this.slideDiscount = slide(prod.length, this.step);

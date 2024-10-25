@@ -1,7 +1,5 @@
 import {
   Component,
-  HostBinding,
-  HostListener,
   input,
   InputSignal,
   OnChanges,

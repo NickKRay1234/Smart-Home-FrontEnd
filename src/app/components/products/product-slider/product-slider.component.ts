@@ -17,7 +17,9 @@ export class ProductSliderComponent implements OnInit, OnDestroy {
   selectedIdx = 0;
   private intervalId!: ReturnType<typeof setInterval>;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.autoPlay();
+  }
 
   autoPlay(): void {
     this.intervalId = setInterval(() => {
