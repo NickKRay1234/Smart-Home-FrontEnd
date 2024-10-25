@@ -154,7 +154,7 @@ h4 {
     border: 2px dashed var(--B1, #AFC1E7);
 }
 
-button::content {
+a, button::content {
     color: var(--blck, #393939);
 
     /* Button S D */
@@ -163,6 +163,7 @@ button::content {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    text-decoration: none;
 }
 
 h6 {
