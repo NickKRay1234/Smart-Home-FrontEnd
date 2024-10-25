@@ -2,7 +2,7 @@ import { Component, inject, NgZone, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { AccountService } from '../../../core/services/account.service';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginRequest } from '../../../shared/models/account/login-request.model';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 import { environment } from '../../../../environments/environment';
@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
