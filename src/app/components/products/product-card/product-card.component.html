@@ -24,16 +24,19 @@
         <app-svg-icon [path]="arrowRight" />
       </div>
     </div>
-    <p class="product__desription">
+    <p class="product__description">
       {{ product.productDescription | cutString }}
     </p>
     <div class="product__price">
       <div class="product__likes">stars</div>
       <div class="product__price-item">
-        @if(product.productDiscount) {
-        <p class="price">{{ product.productPrice }}</p>
-        }
-        <p class="discount">{{ product.priceWithDiscount }}</p>
+        <!-- @if(product.productDiscount) { -->
+        <div class="price__wrapper">
+          <p class="price">{{ product.productPrice | price }}&#8372;</p>
+          <div class="line__one"></div>
+        </div>
+        <!-- } -->
+        <p class="discount">{{ product.priceWithDiscount | price }}&#8372;</p>
       </div>
     </div>
     @if(currentIdx !== null && $index === currentIdx ) {

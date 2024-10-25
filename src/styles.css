@@ -26,8 +26,8 @@ h5 {
   border: none;
   border-radius: 44px;
   padding: 10px 20px;
-  min-width: 106px;
-  min-height: 43px;
+  /* min-width: 106px;
+  min-height: 43px; */
   cursor: pointer;
 }
 /* style for primary buttons */

@@ -11,11 +11,12 @@ import { Product } from '@shared/models/product/product';
 import { CutStringPipe } from '../../../core/pipes/cut-string.pipe';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
 import { NgClass, NgIf } from '@angular/common';
+import { PricePipe } from '@core/pipes/price.pipe';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CutStringPipe, SvgIconComponent, NgClass, NgIf],
+  imports: [CutStringPipe, SvgIconComponent, NgClass, NgIf, PricePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
 })
