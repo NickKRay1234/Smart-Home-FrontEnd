@@ -1,28 +1,26 @@
 <header>
-    <div class="container">
-        <a href="#">
-            <img src="assets/logo.svg" alt="Logo">
-        </a>
-        <nav class="navigation">
-            <ul>
-                <li><a href="#">Гарантія</a></li>
-                <li><a href="#">Обмін</a></li>
-                <li><a href="#">Новини</a></li>
-                <li><a href="#">Служба Підтримки</a></li>
-                <li><a href="#">Блог</a></li>
-            </ul>
-        </nav>
-        <div class="user">
-            <div class="login">
-                @if (user === undefined) {
-                    <a class="login" routerLink="account/login">Увійти</a>
-                }
-                @else {
-                    <span>{{user.firstName}}</span>
-                }
-                <img src="assets/user.png" alt="User icon">
-            </div>
-        </div>
+  <div class="container">
+    <a href="#">
+      <img src="assets/logo.svg" alt="Logo" />
+    </a>
+    <nav class="navigation">
+      <ul>
+        <li><a href="#">Гарантія</a></li>
+        <li><a href="#">Обмін</a></li>
+        <li><a href="#">Новини</a></li>
+        <li><a href="#">Служба Підтримки</a></li>
+        <li><a href="#">Блог</a></li>
+      </ul>
+    </nav>
+    <div class="user">
+      <div class="login">
+        @if (user === undefined) {
+        <a class="login" routerLink="account/login">Увійти</a>
+        } @else {
+        <span>{{ user.firstName }}</span>
+        }
+        <img src="assets/user.png" alt="User icon" />
+      </div>
     </div>
   </div>
 </header>
