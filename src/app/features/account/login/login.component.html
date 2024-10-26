@@ -1,48 +1,79 @@
 <div class="wrapper">
+  <div class="frame">
+    <a href="/" class="close-icon">
+      <img src="/assets/images/png/tabler-icon-x.png" alt="Close" />
+    </a>
     <div class="frame">
-        <a href="/" class="close-icon">
-            <img src="assets/tabler-icon-x.png" alt="Close">
-        </a>
+      <a href="/" class="close-icon">
+        <img src="assets/tabler-icon-x.png" alt="Close" />
+      </a>
 
-        <h2>Вхід</h2>
+      <h2>Вхід</h2>
 
-        <div class="container">
-            <form class="login-form" #form="ngForm">
-                <input type="email" name="email" id="email" placeholder="Електронна пошта" [(ngModel)]="model.email">
-                @if (showError) {
-                    <div class="alert">{{errorMessage}}</div>
-                }
-                <input type="password" name="pwd" id="pwd" placeholder="Пароль" [(ngModel)]="model.password">
-                @if (showError) {
-                    <div class="alert">{{errorMessage}}</div>
-                }
-                <button class="login" (click)="onFormSubmit()">Увійти</button>
-            </form>
+      <div class="container">
+        <form class="login-form" #form="ngForm">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Електронна пошта"
+            [(ngModel)]="model.email"
+          />
+          @if (showError) {
+          <div class="alert">{{ errorMessage }}</div>
+          }
+          <input
+            type="password"
+            name="pwd"
+            id="pwd"
+            placeholder="Пароль"
+            [(ngModel)]="model.password"
+          />
+          @if (showError) {
+          <div class="alert">{{ errorMessage }}</div>
+          }
+          <button class="login" (click)="onFormSubmit()">Увійти</button>
+        </form>
 
-            <div class="social">
-                <h4>Або увійти через</h4>
-                <div class="social-icons">
-                    <a href="https://facebook.com" class="facebook">
-                        <img src="assets/facebook.png" alt="facebook">
-                    </a>
-                    <!-- <a class="google" (click)="externalLogin()">
+        <div class="social">
+          <h4>Або увійти через</h4>
+          <div class="social-icons">
+            <a href="https://facebook.com" class="facebook">
+              <img src="assets/facebook.png" alt="facebook" />
+            </a>
+            <!-- <a class="google" (click)="externalLogin()">
+      <div class="social">
+        <h4>Або увійти через</h4>
+        <div class="social-icons">
+          <a href="https://facebook.com" class="facebook">
+            <img src="/assets/facebook.png" alt="facebook" />
+          </a>
+           <a class="google" (click)="externalLogin()">
                     </a> -->
-                    <div id="google">
-                        <!-- <img src="/assets/google.png" alt="Google"> -->
-                    </div>
-                </div>
+            <div id="google">
+              <!-- <img src="/assets/google.png" alt="Google"> -->
             </div>
-
-            <div class="redirect">
-                <div class="register">
-                    <a routerLink="../register">Зареєструватися</a>
-                </div>
-                <h6>
-                    Забули пароль?
-                    <a href="#" class="restore">Відновити</a>
-                </h6>
-            </div>
+          </div>
         </div>
-    </div>
-</div>
 
+        <div class="redirect">
+          <div class="register">
+            <a routerLink="../register">Зареєструватися</a>
+          </div>
+          <h6>
+            Забули пароль?
+            <a href="#" class="restore">Відновити</a>
+          </h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="redirect">
+      <button class="register">Зареєструватись</button>
+      <h6>
+        Забули пароль?
+        <a href="#" class="restore">Відновити</a>
+      </h6>
+    </div>
+  </div>
+</div>

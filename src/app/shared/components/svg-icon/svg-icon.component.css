@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: #d0d4d8;
+  /* background-image: linear-gradient(to left, #ff9e9e, #fadc93); */
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+}

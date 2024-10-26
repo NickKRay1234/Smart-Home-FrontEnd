@@ -1,50 +1,49 @@
 <header>
-    <div class="container">
-        <a href="#">
-            <img src="assets/logo.svg" alt="Logo">
-        </a>
-        <nav class="navigation">
-            <ul>
-                <li><a href="#">Гарантія</a></li>
-                <li><a href="#">Обмін</a></li>
-                <li><a href="#">Новини</a></li>
-                <li><a href="#">Служба Підтримки</a></li>
-                <li><a href="#">Блог</a></li>
-            </ul>
-        </nav>
-        <div class="user">
-            <div class="login">
-                @if (user === undefined) {
-                    <a class="login" routerLink="account/login">Увійти</a>
-                }
-                @else {
-                    <span>{{user.firstName}}</span>
-                }
-                <img src="assets/user.png" alt="User icon">
-            </div>
-        </div>
+  <div class="container">
+    <a href="#">
+      <img src="assets/logo.svg" alt="Logo" />
+    </a>
+    <nav class="navigation">
+      <ul>
+        <li><a href="#">Гарантія</a></li>
+        <li><a href="#">Обмін</a></li>
+        <li><a href="#">Новини</a></li>
+        <li><a href="#">Служба Підтримки</a></li>
+        <li><a href="#">Блог</a></li>
+      </ul>
+    </nav>
+    <div class="user">
+      <div class="login">
+        @if (user === undefined) {
+        <a class="login" routerLink="account/login">Увійти</a>
+        } @else {
+        <span>{{ user.firstName }}</span>
+        }
+        <img src="assets/user.png" alt="User icon" />
+      </div>
     </div>
+  </div>
 </header>
 
 <div class="nav-buttons">
-    <button class="catalog-button">
-        <span>Каталог</span>
-        <span class="catalog-icon">☰</span> <!-- Replace with actual icon if needed -->
-    </button>
+  <button class="catalog-button">
+    <span>Каталог</span>
+    <span class="catalog-icon">☰</span>
+    <!-- Replace with actual icon if needed -->
+  </button>
 
-    <div class="icon-buttons">
-        <a href="#" class="icon-buttons circle-button">
-            <img src="assets/search.png" alt="Search">
-        </a>
-        <a href="#" class="icon-buttons circle-button">
-            <img src="assets/compare.png" alt="Compare">
-        </a>
-        <a href="#" class="icon-buttons circle-button">
-            <img src="assets/search.png" alt="Search">
-        </a>
-        <a href="#" class="icon-buttons circle-button">
-            <img src="assets/search.png" alt="Search">
-        </a>
-    </div>
+  <div class="icon-buttons">
+    <a href="#" class="icon-buttons circle-button">
+      <img src="/assets/images/png/search.png" alt="Search" />
+    </a>
+    <a href="#" class="icon-buttons circle-button">
+      <img src="/assets/images/png/compare.png" alt="Compare" />
+    </a>
+    <a href="#" class="icon-buttons circle-button">
+      <img src="/assets/images/png/search.png" alt="Search" />
+    </a>
+    <a href="#" class="icon-buttons circle-button">
+      <img src="/assets/images/png/search.png" alt="Search" />
+    </a>
+  </div>
 </div>
-

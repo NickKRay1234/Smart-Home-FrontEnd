@@ -1,0 +1,49 @@
+<div class="product__card">
+  @for (product of products; track $index) {
+  <div
+    class="product__item"
+    (mouseenter)="onMouseEnter($index)"
+    (mouseleave)="onMouseLeave($index)"
+  >
+    <div class="product__image">
+      <img
+        class="product__item-image"
+        [src]="product.images[currentImage].imageUrl"
+        alt="product image"
+      />
+      <!-- @if (product.productDiscount) { -->
+      <div class="product__discount">{{ product.productDiscount }} %</div>
+      <!-- } -->
+      <div class="product__like">
+        <app-svg-icon [path]="heart" />
+      </div>
+      <div class="arrow__left" (click)="slideLeft($index)">
+        <app-svg-icon [path]="arrowLeft" />
+      </div>
+      <div class="arrow__right" (click)="slideRight($index)">
+        <app-svg-icon [path]="arrowRight" />
+      </div>
+    </div>
+    <p class="product__description">
+      {{ product.productDescription | cutString }}
+    </p>
+    <div class="product__price">
+      <div class="product__likes">stars</div>
+      <div class="product__price-item">
+        <!-- @if(product.productDiscount) { -->
+        <div class="price__wrapper">
+          <p class="price">{{ product.productPrice | price }}&#8372;</p>
+          <div class="line__one"></div>
+        </div>
+        <!-- } -->
+        <p class="discount">{{ product.priceWithDiscount | price }}&#8372;</p>
+      </div>
+    </div>
+    @if(currentIdx !== null && $index === currentIdx ) {
+    <div class="product__button">
+      <button class="btn btn__primary">До кошика</button>
+    </div>
+    }
+  </div>
+  }
+</div>

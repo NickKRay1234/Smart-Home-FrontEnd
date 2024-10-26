@@ -1,0 +1,53 @@
+<section class="products">
+  <app-product-slider />
+
+  <section class="products__items">
+    <div class="products__nav">
+      <h1 class="products__nav__tittle">Супер знижки</h1>
+      <button class="btn__nav__more" (click)="moreDiscount()">
+        <p>Більше</p>
+        <p>></p>
+      </button>
+    </div>
+    <div class="products__cards">
+      @if (products?.length) {
+
+      <app-product-card
+        [productsInput]="products"
+        [start]="startDisc"
+        [end]="endDisc"
+      />
+      } @else {
+      <h1>Loading ...</h1>
+      }
+    </div>
+  </section>
+  <section class="products__items">
+    <div class="products__nav">
+      <h1 class="products__nav__tittle">Новинки року</h1>
+      <button class="btn__nav__more" (click)="moreNew()">
+        <p>Більше</p>
+        <p>></p>
+      </button>
+    </div>
+    <app-product-card
+      [productsInput]="products"
+      [start]="startNew"
+      [end]="endNew"
+    />
+  </section>
+  <section class="products__items">
+    <div class="products__nav">
+      <h1 class="products__nav__tittle">Найкраще для вас</h1>
+      <button class="btn__nav__more" (click)="moreBest()">
+        <p>Більше</p>
+        <p>></p>
+      </button>
+    </div>
+    <app-product-card
+      [productsInput]="products"
+      [start]="startBest"
+      [end]="endBest"
+    />
+  </section>
+</section>

@@ -1,0 +1,279 @@
+.product__card {
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.product__card:first-child {
+  padding-left: 20px;
+}
+
+.product__item {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 24px;
+  max-width: 260px;
+  min-width: 180px;
+  max-height: 360px;
+  padding: 20px 10px 10px 10px;
+  align-items: center;
+  position: relative;
+}
+
+.product__description {
+  max-height: 59px;
+  font-family: Jura;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.product__item-image {
+  width: 180px;
+  height: 140px;
+  border-radius: 14px;
+  object-fit: contain;
+}
+
+.product__price {
+  display: flex;
+  justify-content: space-between;
+  padding: 16.5px 10px;
+  width: 180px;
+  font-family: Jura;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: var(--black);
+}
+
+.product__likes {
+  align-self: self-end;
+}
+
+.product__button {
+  position: absolute;
+  padding-bottom: 10px;
+  bottom: 0;
+  background: var(--white);
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+  min-width: 200px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transform: translate(50%, 50%);
+
+  bottom: -5%;
+  right: 50%;
+  width: 100%;
+}
+
+.price {
+  font-family: Jura;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15.38px;
+  text-align: left;
+  color: var(--g2);
+}
+
+.product__image {
+  position: relative;
+}
+
+.product__discount {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  height: 24px;
+  width: 44.5px;
+  text-align: center;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+  background: #94d397;
+}
+
+.product__like {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.arrow__left {
+  left: 4px;
+}
+
+.arrow__right {
+  right: 4px;
+}
+
+.arrow__left,
+.arrow__right {
+  position: absolute;
+  cursor: pointer;
+  width: 7px;
+  height: 14px;
+  top: 63px;
+}
+
+.price__wrapper {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.line__one {
+  position: absolute;
+  width: 100%;
+  border-bottom: 2px solid #abb8c4;
+  transform: rotate(170deg);
+  top: 7px;
+  left: 0;
+}
+
+.discount {
+  font-family: Jura;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  text-align: right;
+}
+/* medium */
+@media (max-width: 1280px) {
+  .product__card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+  }
+
+  .product__card:first-child {
+    padding-left: 12px;
+  }
+}
+/* small */
+@media (max-width: 744px) {
+  .product__card {
+    width: 390px;
+  }
+
+  .product__item {
+    max-width: 180px;
+    min-width: 142px;
+  }
+
+  .product__button {
+    min-width: 142px;
+  }
+
+  .product__item-image {
+    width: 160px;
+    /* padding: 0 10px; */
+  }
+  .product__discount {
+    height: 20px;
+    width: 37px;
+    font-size: 12px;
+    line-height: 14px;
+    right: 8px;
+  }
+
+  .product__description {
+    contain: paint;
+    max-height: 31px;
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  .product__price {
+    width: 160px;
+    padding: 8px 10px;
+  }
+
+  .discount {
+    font-size: 13px;
+    line-height: 15.38px;
+  }
+
+  .btn {
+    width: 110px;
+    height: 32px;
+    padding: 6px 14px;
+  }
+
+  .btn__primary {
+    font-size: 14px;
+    line-height: 16.38px;
+  }
+  .product__button {
+    /* padding-top: 15px; */
+    padding-bottom: 10px;
+  }
+}
+/* extra small */
+@media (max-width: 424px) {
+  .product__card {
+    width: 300px;
+  }
+
+  .product__item {
+    max-width: 260px;
+    min-width: 142px;
+    padding: 10px;
+  }
+
+  .product__button {
+    min-width: 142px;
+  }
+
+  .product__item-image {
+    width: 140px;
+  }
+
+  .product__price {
+    max-width: 260px;
+    min-width: 142px;
+    padding: 10px;
+  }
+
+  .product__price-item {
+    padding: 0 10px;
+  }
+
+  .line__one {
+    width: 36px;
+  }
+
+  .discount {
+    font-size: 13x;
+    line-height: 15.38px;
+  }
+
+  .price {
+    font-size: 9.53px;
+    line-height: 15.38px;
+  }
+
+  .btn {
+    width: 110px;
+    height: 32px;
+    padding: 6px 14px;
+  }
+
+  .btn__primary {
+    font-size: 14px;
+    line-height: 16.38px;
+  }
+  .product__button {
+    /* padding-top: 15px; */
+    padding-bottom: 10px;
+  }
+}
