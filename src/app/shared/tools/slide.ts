@@ -1,4 +1,4 @@
-type Slide = () => { start: number; end: number };
+export type Slide = () => { start: number; end: number };
 
 export const slide = (max: number, step: number = 1): Slide => {
   let start = 0;

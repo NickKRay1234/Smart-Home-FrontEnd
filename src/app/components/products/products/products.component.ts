@@ -11,12 +11,18 @@ import { ProductSliderComponent } from '../product-slider/product-slider.compone
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { AsyncPipe } from '@angular/common';
 import { Product } from '@shared/models/product/product';
-import { slide } from '@shared/tools/slide';
+import { Slide, slide } from '@shared/tools/slide';
+import { CartComponent } from 'app/components/cart/cart.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductSliderComponent, ProductCardComponent, AsyncPipe],
+  imports: [
+    ProductSliderComponent,
+    ProductCardComponent,
+    AsyncPipe,
+    CartComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
   providers: [ProductService],
@@ -24,9 +30,9 @@ import { slide } from '@shared/tools/slide';
 export class ProductsComponent implements OnInit {
   private productService = inject(ProductService);
   private destroyRef = inject(DestroyRef);
-  private slideDiscount: any;
-  private slideNew: any;
-  private slideBest: any;
+  private slideDiscount!: Slide;
+  private slideNew!: Slide;
+  private slideBest!: Slide;
   private step = 5;
 
   products!: Product[] | undefined;
