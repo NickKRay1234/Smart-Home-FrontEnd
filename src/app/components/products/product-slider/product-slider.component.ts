@@ -1,9 +1,21 @@
 import { NgClass } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ApplicationRef,
+  Component,
+  Inject,
+  InjectionToken,
+  OnInit,
+  signal,
+} from '@angular/core';
 
 import { AdvSlider, advSlider } from '@shared/configs/adv-slider.config';
 import { PricePipe } from '@core/pipes/price.pipe';
+import { first } from 'rxjs';
 
+const store = new InjectionToken<AdvSlider[]>('Storage', {
+  providedIn: 'root',
+  factory: () => advSlider,
+});
 @Component({
   selector: 'app-product-slider',
   standalone: true,
@@ -11,34 +23,27 @@ import { PricePipe } from '@core/pipes/price.pipe';
   templateUrl: './product-slider.component.html',
   styleUrl: './product-slider.component.css',
 })
-export class ProductSliderComponent implements OnInit, OnDestroy {
-  advProducts: AdvSlider[] = advSlider;
-  advCurrentProduct: AdvSlider = this.advProducts[0];
+export class ProductSliderComponent implements OnInit {
   selectedIdx = 0;
-  private intervalId!: ReturnType<typeof setInterval>;
 
-  ngOnInit(): void {
-    // this.autoPlay();
+  constructor(
+    @Inject(store) public advProducts: AdvSlider[],
+    private appRef: ApplicationRef
+  ) {
+    this.advProducts = advSlider;
   }
 
-  autoPlay(): void {
-    this.intervalId = setInterval(() => {
-      if (this.selectedIdx >= this.advProducts.length) {
-        this.selectedIdx = 0;
-        this.advCurrentProduct = this.advProducts[this.selectedIdx];
-      } else {
-        this.selectedIdx++;
-        this.advCurrentProduct = this.advProducts[this.selectedIdx];
-      }
-    }, 3000);
+  ngOnInit(): void {
+    this.appRef.isStable.pipe(first((isStable) => isStable)).subscribe(() => {
+      setInterval(
+        () =>
+          (this.selectedIdx = (this.selectedIdx + 1) % this.advProducts.length),
+        500
+      );
+    });
   }
 
   isActive(idx: number): void {
     this.selectedIdx = idx;
-    this.advCurrentProduct = this.advProducts[idx];
-  }
-
-  ngOnDestroy(): void {
-    clearInterval(this.intervalId);
   }
 }

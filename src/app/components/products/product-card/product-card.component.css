@@ -12,7 +12,7 @@
 .product__item {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--white);
   border-radius: 24px;
   max-width: 260px;
   min-width: 180px;
@@ -46,7 +46,7 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 19px;
-  color: #000;
+  color: var(--black);
 }
 
 .product__likes {
@@ -57,7 +57,7 @@
   position: absolute;
   padding-bottom: 10px;
   bottom: 0;
-  background: #fff;
+  background: var(--white);
   border-bottom-right-radius: 40px;
   border-bottom-left-radius: 40px;
   min-width: 200px;
@@ -67,6 +67,7 @@
   display: flex;
   justify-content: center;
   transform: translate(50%, 50%);
+
   bottom: -5%;
   right: 50%;
   width: 100%;
@@ -78,7 +79,7 @@
   font-weight: 600;
   line-height: 15.38px;
   text-align: left;
-  color: #abb8c4;
+  color: var(--g2);
 }
 
 .product__image {

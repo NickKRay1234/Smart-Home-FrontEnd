@@ -1,12 +1,9 @@
 import {
   Component,
   DestroyRef,
-  effect,
   HostListener,
   inject,
   OnInit,
-  signal,
-  WritableSignal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductService } from '../../../core/services/product.service';
@@ -15,8 +12,6 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 import { AsyncPipe } from '@angular/common';
 import { Product } from '@shared/models/product/product';
 import { slide } from '@shared/tools/slide';
-import { tap } from 'rxjs';
-import { withDebugTracing } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -66,12 +61,12 @@ export class ProductsComponent implements OnInit {
   }
 
   resize(prod: Product[], width: number) {
-    if (width > 1280) {
+    if (width > 1280 && prod?.length) {
       this.step = 5;
       this.slideDiscount = slide(prod.length, this.step);
       this.slideBest = slide(prod.length, this.step);
       this.slideNew = slide(prod.length, this.step);
-    } else if (width > 744) {
+    } else if (width > 744 && prod?.length) {
       this.step = 3;
       this.slideDiscount = slide(prod.length, this.step);
       this.slideBest = slide(prod.length, this.step);

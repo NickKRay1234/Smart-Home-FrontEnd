@@ -1,5 +1,7 @@
 .slider__container {
   margin: 60px 40px;
+  position: relative;
+  overflow: hidden;
 }
 
 .slider__wrapper {
@@ -10,7 +12,8 @@
   border-radius: 40px;
   width: 1200px;
   height: 350px;
-  background-image: linear-gradient(to left, #ff9e9e, #fadc93);
+  background-image: linear-gradient(to left, var(--bg-img1), var(--y1));
+  transition: transform 0.5s ease-in-out;
 }
 
 .slider__nav {
@@ -25,16 +28,17 @@
   width: 100px;
   height: 10px;
   border-radius: 20px;
-  background: #d6cde0;
+  background: var(--v3);
   cursor: pointer;
 }
 
 .slider__nav-item__active {
-  background: #c4a8db;
+  background: var(--v2);
 }
 
 .slider__image > img {
   height: 350px;
+  object-fit: cover;
 }
 
 .slider__content {
@@ -58,7 +62,7 @@
   font-weight: 700;
   font-size: 96px;
   line-height: 113.57px;
-  color: #0ee606;
+  color: var(--gr1);
 }
 
 .price__line-through {
@@ -67,7 +71,7 @@
   font-size: 26px;
   line-height: 30.76px;
   padding-top: 22px;
-  color: #91a0a5;
+  color: var(--g1);
 }
 
 .price__wrapper {
@@ -79,7 +83,7 @@
 .line__two {
   position: absolute;
   width: 121px;
-  border-bottom: 2px solid #e69779;
+  border-bottom: 2px solid var(--r1);
 }
 
 .line__one {
