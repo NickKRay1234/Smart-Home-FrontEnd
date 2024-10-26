@@ -42,13 +42,17 @@ export class ProductSliderComponent implements OnInit, OnDestroy {
     );
   }
 
+  stopAutoPlay() {
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
+  }
+
   isActive(idx: number): void {
     this.selectedIdx = idx;
   }
 
   ngOnDestroy(): void {
-    if (this.timerId) {
-      clearInterval(this.timerId);
-    }
+    this.stopAutoPlay();
   }
 }
