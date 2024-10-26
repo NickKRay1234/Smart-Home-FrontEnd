@@ -19,11 +19,11 @@ import { PricePipe } from '@core/pipes/price.pipe';
   styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent implements OnChanges {
-  productsInput: InputSignal<Product[]> = input.required();
+  productsInput: InputSignal<Product[] | undefined> = input.required();
   start: InputSignal<number> = input.required();
   end: InputSignal<number> = input.required();
 
-  products: Product[] = [];
+  products: Product[] | undefined = [];
   currentImage = 0;
   currentIdx: number | null = null;
   heart = '/assets/images/svg/heart.svg';
@@ -39,19 +39,26 @@ export class ProductCardComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.products = this.productsInput()?.slice(this.start(), this.end());
+    if (this.productsInput()?.length) {
+      this.products = this.productsInput()?.slice(this.start(), this.end());
+    }
   }
 
   slideLeft(idx: number) {
     if (this.currentImage - 1 >= 1) {
       this.currentImage -= 1;
     } else {
-      this.currentImage = this.products[idx].images.length - 1;
+      if (this.products?.length) {
+        this.currentImage = this.products[idx].images.length - 1;
+      }
     }
   }
 
   slideRight(idx: number) {
-    if (this.currentImage + 1 < this.products[idx].images.length) {
+    if (
+      this.products?.length &&
+      this.currentImage + 1 < this.products[idx].images.length
+    ) {
       this.currentImage += 1;
     } else {
       this.currentImage = 0;

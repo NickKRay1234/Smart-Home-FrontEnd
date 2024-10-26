@@ -10,7 +10,7 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http
-      .get<ProductRes>(`${environment.apiUrl}/api/Products?saleDesc`)
+      .get<ProductRes>(`${environment.apiUrl}Products?saleDesc`)
       .pipe(map((product: ProductRes) => product.data));
   }
 }

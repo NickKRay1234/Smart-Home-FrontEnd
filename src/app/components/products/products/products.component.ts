@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
   private slideBest: any;
   private step = 5;
 
-  products!: Product[];
+  products!: Product[] | undefined;
 
   startDisc = 0;
   endDisc = this.step;
@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit {
   endBest = this.step;
 
   @HostListener('window:resize') onResize() {
-    if (window?.innerWidth) {
+    if (window?.innerWidth && this.products?.length) {
       this.resize(this.products, window.innerWidth);
       this.moreDiscount();
       this.moreNew();
@@ -47,10 +47,12 @@ export class ProductsComponent implements OnInit {
     }
   }
   @HostListener('window:load') onLoad() {
-    this.resize(this.products, window.innerWidth);
-    this.moreDiscount();
-    this.moreNew();
-    this.moreBest();
+    if (this.products?.length) {
+      this.resize(this.products, window.innerWidth);
+      this.moreDiscount();
+      this.moreNew();
+      this.moreBest();
+    }
   }
 
   ngOnInit(): void {
