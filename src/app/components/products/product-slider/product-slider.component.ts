@@ -1,21 +1,15 @@
-import { NgClass } from '@angular/common';
+import { isPlatformBrowser, NgClass } from '@angular/common';
 import {
-  ApplicationRef,
   Component,
   Inject,
-  InjectionToken,
+  OnDestroy,
   OnInit,
-  signal,
+  PLATFORM_ID,
 } from '@angular/core';
 
 import { AdvSlider, advSlider } from '@shared/configs/adv-slider.config';
 import { PricePipe } from '@core/pipes/price.pipe';
-import { first } from 'rxjs';
 
-const store = new InjectionToken<AdvSlider[]>('Storage', {
-  providedIn: 'root',
-  factory: () => advSlider,
-});
 @Component({
   selector: 'app-product-slider',
   standalone: true,
@@ -23,27 +17,38 @@ const store = new InjectionToken<AdvSlider[]>('Storage', {
   templateUrl: './product-slider.component.html',
   styleUrl: './product-slider.component.css',
 })
-export class ProductSliderComponent implements OnInit {
-  selectedIdx = 0;
-
-  constructor(
-    @Inject(store) public advProducts: AdvSlider[],
-    private appRef: ApplicationRef
-  ) {
+export class ProductSliderComponent implements OnInit, OnDestroy {
+  selectedIdx!: number;
+  advProducts: AdvSlider[] = [];
+  private timerId!: ReturnType<typeof setInterval>;
+  private isBrowser!: boolean;
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.advProducts = advSlider;
+    this.selectedIdx = 0;
   }
 
   ngOnInit(): void {
-    this.appRef.isStable.pipe(first((isStable) => isStable)).subscribe(() => {
-      setInterval(
-        () =>
-          (this.selectedIdx = (this.selectedIdx + 1) % this.advProducts.length),
-        500
-      );
-    });
+    if (this.isBrowser) {
+      this.autoPlay();
+    }
+  }
+
+  autoPlay(): void {
+    this.timerId = setInterval(
+      () =>
+        (this.selectedIdx = (this.selectedIdx + 1) % this.advProducts.length),
+      3000
+    );
   }
 
   isActive(idx: number): void {
     this.selectedIdx = idx;
+  }
+
+  ngOnDestroy(): void {
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
   }
 }
