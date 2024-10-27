@@ -10,7 +10,19 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http
-      .get<ProductRes>(`${environment.apiUrl}Products?Sort=saleDesc`)
+
+      .get<ProductRes>(`${environment.apiUrl}Products?PageSize=100000`)
       .pipe(map((product: ProductRes) => product.data));
+  }
+
+  getDiscountProducts(): Observable<Product[]> {
+    return this.http
+      .get<ProductRes>(`${environment.apiUrl}Products?Sort=saleDesc`)
+      .pipe(
+        map((product: ProductRes) => {
+          console.log(product);
+          return product.data;
+        })
+      );
   }
 }

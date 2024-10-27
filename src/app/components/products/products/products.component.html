@@ -4,16 +4,20 @@
   <section class="products__items">
     <div class="products__nav">
       <h1 class="products__nav__tittle">Супер знижки</h1>
-      <button class="btn__nav__more" (click)="moreDiscount()">
+      <button
+        class="btn__nav__more"
+        [ngClass]="{disabled}"
+        (click)="moreDiscount()"
+      >
         <p>Більше</p>
         <p>></p>
       </button>
     </div>
     <div class="products__cards">
-      @if (products?.length) {
+      @if (products.length) {
 
       <app-product-card
-        [productsInput]="products"
+        [productsInput]="discountProducts"
         [start]="startDisc"
         [end]="endDisc"
       />

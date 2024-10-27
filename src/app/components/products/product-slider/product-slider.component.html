@@ -1,5 +1,5 @@
 <div class="slider__container">
-  <div class="slider">
+  <div class="slider" (mouseenter)="stopAutoPlay()" (mouseleave)="autoPlay()">
     <div class="slider__wrapper">
       <div class="slider__content">
         <h1>{{ advProducts[selectedIdx].tittle }}</h1>
