@@ -19,16 +19,16 @@ import { PricePipe } from '@core/pipes/price.pipe';
   styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent implements OnChanges {
-  productsInput: InputSignal<Product[] | undefined> = input.required();
+  productsInput: InputSignal<Product[]> = input.required();
   start: InputSignal<number> = input.required();
   end: InputSignal<number> = input.required();
 
-  products: Product[] | undefined = [];
+  products: Product[] = [];
   currentImage = 0;
   currentIdx: number | null = null;
-  heart = '/assets/images/svg/heart.svg';
-  arrowLeft = '/assets/images/svg/left-arrow.svg';
-  arrowRight = '/assets/images/svg/right-arrow.svg';
+  heart = 'assets/images/svg/heart.svg';
+  arrowLeft = 'assets/images/svg/left-arrow.svg';
+  arrowRight = 'assets/images/svg/right-arrow.svg';
 
   onMouseEnter(i: number) {
     this.currentIdx = i;

@@ -11,9 +11,9 @@
         [src]="product.images[currentImage].imageUrl"
         alt="product image"
       />
-      <!-- @if (product.productDiscount) { -->
+      @if (product.productDiscount) {
       <div class="product__discount">{{ product.productDiscount }} %</div>
-      <!-- } -->
+      }
       <div class="product__like">
         <app-svg-icon [path]="heart" />
       </div>
@@ -30,12 +30,12 @@
     <div class="product__price">
       <div class="product__likes">stars</div>
       <div class="product__price-item">
-        <!-- @if(product.productDiscount) { -->
+        @if(product.productDiscount) {
         <div class="price__wrapper">
           <p class="price">{{ product.productPrice | price }}&#8372;</p>
           <div class="line__one"></div>
         </div>
-        <!-- } -->
+        }
         <p class="discount">{{ product.priceWithDiscount | price }}&#8372;</p>
       </div>
     </div>
