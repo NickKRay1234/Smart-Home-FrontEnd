@@ -46,8 +46,8 @@
   line-height: 19px;
 }
 
-.disabled {
-  background-color: var(--g3);
+.btn__disabled {
+  background-color: var(--g4);
   color: var(--g1);
 }
 
