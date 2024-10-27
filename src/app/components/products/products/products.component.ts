@@ -94,29 +94,21 @@ export class ProductsComponent implements OnInit {
   }
 
   moreDiscount(): void {
-    if (!this.disabled) {
-      const { start, end, disabled } = this.slideDiscount();
-      this.startDisc = start;
-      this.endDisc = end;
-      this.disabled = disabled;
-    }
+    const { start, end, disabled } = this.slideDiscount();
+    this.startDisc = start;
+    this.endDisc = end;
+    this.disabled = disabled;
   }
 
   moreNew(): void {
-    if (this.disabled) {
-      const { start, end, disabled } = this.slideNew();
-      this.startNew = start;
-      this.endNew = end;
-      this.disabled = disabled;
-    }
+    const { start, end, disabled } = this.slideNew();
+    this.startNew = start;
+    this.endNew = end;
   }
 
   moreBest(): void {
-    if (this.disabled) {
-      const { start, end, disabled } = this.slideBest();
-      this.startBest = start;
-      this.endBest = end;
-      this.disabled = disabled;
-    }
+    const { start, end, disabled } = this.slideBest();
+    this.startBest = start;
+    this.endBest = end;
   }
 }
