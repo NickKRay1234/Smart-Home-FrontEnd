@@ -1,1 +1,0 @@
-import"./chunk-4CLCTAJ7.js";var t=[{path:"login",loadComponent:()=>import("./chunk-WGP2YP2O.js").then(o=>o.LoginComponent)},{path:"register",loadComponent:()=>import("./chunk-U442H2UP.js").then(o=>o.RegisterComponent)}];export{t as accountRoutes};
