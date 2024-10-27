@@ -84,6 +84,7 @@
 
 .product__image {
   position: relative;
+  padding-bottom: 10px;
 }
 
 .product__discount {
