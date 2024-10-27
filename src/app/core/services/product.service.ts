@@ -10,6 +10,7 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http
+
       .get<ProductRes>(`${environment.apiUrl}Products?PageSize=100000`)
       .pipe(map((product: ProductRes) => product.data));
   }
