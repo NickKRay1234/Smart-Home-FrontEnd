@@ -64,4 +64,12 @@ export class ProductCardComponent implements OnChanges {
       this.currentImage = 0;
     }
   }
+
+  addFavorite(id: number, idx: number) {
+    if (id === this.products[idx].productId && !this.products[idx].favorite) {
+      this.products[idx].favorite = true;
+    } else {
+      this.products[idx].favorite = false;
+    }
+  }
 }

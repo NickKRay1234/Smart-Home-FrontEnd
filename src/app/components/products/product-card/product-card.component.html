@@ -14,8 +14,15 @@
       @if (product.productDiscount) {
       <div class="product__discount">{{ product.productDiscount }} %</div>
       }
-      <div class="product__like">
-        <app-svg-icon [path]="heart" />
+      <div
+        class="product__like"
+        (click)="addFavorite(product.productId, $index)"
+      >
+        <app-svg-icon
+          [path]="
+            product.favorite ? 'assets/images/svg/heart-active.svg' : heart
+          "
+        />
       </div>
       <div class="arrow__left" (click)="slideLeft($index)">
         <app-svg-icon [path]="arrowLeft" />

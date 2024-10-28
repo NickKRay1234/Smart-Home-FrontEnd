@@ -46,7 +46,7 @@
   line-height: 19px;
 }
 
-.btn__disabled {
+.disabled {
   background-color: var(--g4);
   color: var(--g1);
 }
