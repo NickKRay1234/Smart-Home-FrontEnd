@@ -13,6 +13,7 @@ import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Product } from '@shared/models/product/product';
 import { Slide, slide } from '@shared/tools/slide';
 import { CartComponent } from 'app/components/cart/cart.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -31,37 +32,32 @@ import { CartComponent } from 'app/components/cart/cart.component';
 export class ProductsComponent implements OnInit {
   private productService = inject(ProductService);
   private destroyRef = inject(DestroyRef);
-  private slideDiscount!: Slide;
-  private slideNew!: Slide;
-  private slideBest!: Slide;
-  private step = 5;
+  private router = inject(Router);
 
-  products: Product[] = [];
   discountProducts: Product[] = [];
-
-  startDisc = 0;
-  endDisc = this.step;
-  startNew = 0;
-  endNew = this.step;
-  startBest = 0;
-  endBest = this.step;
-  disabled = false;
+  newProducts: Product[] = [];
+  bestProducts: Product[] = [];
+  cutDiscountProducts: Product[] = [];
+  cutNewProducts: Product[] = [];
+  cutBestProducts: Product[] = [];
 
   @HostListener('window:resize') onResize() {
-    if (window?.innerWidth && this.products?.length) {
-      this.resize(this.products, window.innerWidth);
-      this.moreDiscount();
-      this.moreNew();
-      this.moreBest();
+    if (window?.innerWidth) {
+      this.cutDiscountProducts = this.resize(
+        this.discountProducts,
+        window.innerWidth
+      );
+      this.cutNewProducts = this.resize(this.newProducts, window.innerWidth);
+      this.cutBestProducts = this.resize(this.bestProducts, window.innerWidth);
     }
   }
   @HostListener('window:load') onLoad() {
-    if (this.products?.length) {
-      this.resize(this.products, window.innerWidth);
-      this.moreDiscount();
-      this.moreNew();
-      this.moreBest();
-    }
+    this.cutDiscountProducts = this.resize(
+      this.discountProducts,
+      window.innerWidth
+    );
+    this.cutNewProducts = this.resize(this.newProducts, window.innerWidth);
+    this.cutBestProducts = this.resize(this.bestProducts, window.innerWidth);
   }
 
   ngOnInit(): void {
@@ -69,46 +65,38 @@ export class ProductsComponent implements OnInit {
       .getProducts()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((prod: Product[]) => {
-        this.products = prod;
-        this.discountProducts = prod.filter((p) => p.productDiscount !== 0);
+        this.newProducts = prod;
+        this.bestProducts = prod;
+      });
+
+    this.productService
+      .getDiscountProducts()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((prod: Product[]) => {
+        this.discountProducts = prod;
       });
   }
 
-  resize(prod: Product[], width: number) {
+  resize(prod: Product[], width: number): Product[] {
+    const step = 5;
     if (width > 1280 && prod?.length) {
-      this.step = 5;
-      this.slideDiscount = slide(this.discountProducts.length, this.step);
-      this.slideBest = slide(prod.length, this.step);
-      this.slideNew = slide(prod.length, this.step);
+      return prod.slice(0, step);
     } else if (width > 744 && prod?.length) {
-      this.step = 3;
-      this.slideDiscount = slide(this.discountProducts.length, this.step);
-      this.slideBest = slide(prod.length, this.step);
-      this.slideNew = slide(prod.length, this.step);
+      return prod.slice(0, step - 2);
     } else {
-      this.step = 2;
-      this.slideDiscount = slide(this.discountProducts.length, this.step);
-      this.slideBest = slide(prod.length, this.step);
-      this.slideNew = slide(prod.length, this.step);
+      return prod.slice(0, step - 3);
     }
   }
 
   moreDiscount(): void {
-    const { start, end, disabled } = this.slideDiscount();
-    this.startDisc = start;
-    this.endDisc = end;
-    this.disabled = disabled;
+    this.router.navigate(['/discount']);
   }
 
   moreNew(): void {
-    const { start, end, disabled } = this.slideNew();
-    this.startNew = start;
-    this.endNew = end;
+    this.router.navigate(['/new']);
   }
 
   moreBest(): void {
-    const { start, end, disabled } = this.slideBest();
-    this.startBest = start;
-    this.endBest = end;
+    this.router.navigate(['/discount']);
   }
 }

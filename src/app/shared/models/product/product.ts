@@ -10,6 +10,7 @@ export interface Product {
   productUrl: string;
   productDescription: string;
   images: Images[];
+  favorite?: boolean;
 }
 
 export interface Categories {

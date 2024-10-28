@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CartService } from '@core/services/cart.service';
+import { Cart } from '@shared/models/product/cart';
 
 @Component({
   selector: 'app-cart',
@@ -11,8 +12,9 @@ import { CartService } from '@core/services/cart.service';
 })
 export class CartComponent {
   private cartService = inject(CartService);
+  carts: Cart[] = [];
 
   constructor() {
-    this.cartService.getCart().subscribe((cart) => console.log(cart));
+    this.cartService.getCart().subscribe((cart: Cart[]) => (this.carts = cart));
   }
 }

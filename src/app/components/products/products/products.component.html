@@ -1,25 +1,20 @@
 <section class="products">
-  <app-product-slider />
+  <app-product-slider class="app-product-slider" />
 
   <section class="products__items">
     <div class="products__nav">
       <h1 class="products__nav__tittle">Супер знижки</h1>
-      <button
-        class="btn__nav__more"
-        [ngClass]="{disabled}"
-        (click)="moreDiscount()"
-      >
+      <button class="btn__nav__more" (click)="moreDiscount()">
         <p>Більше</p>
         <p>></p>
       </button>
     </div>
     <div class="products__cards">
-      @if (products.length) {
+      @if (discountProducts.length) {
 
       <app-product-card
-        [productsInput]="discountProducts"
-        [start]="startDisc"
-        [end]="endDisc"
+        class="app-product-card"
+        [productsInput]="cutDiscountProducts"
       />
       } @else {
       <h1>Loading ...</h1>
@@ -35,9 +30,8 @@
       </button>
     </div>
     <app-product-card
-      [productsInput]="products"
-      [start]="startNew"
-      [end]="endNew"
+      class="app-product-card"
+      [productsInput]="cutNewProducts"
     />
   </section>
   <section class="products__items">
@@ -49,9 +43,8 @@
       </button>
     </div>
     <app-product-card
-      [productsInput]="products"
-      [start]="startBest"
-      [end]="endBest"
+      class="app-product-card"
+      [productsInput]="cutBestProducts"
     />
   </section>
 </section>
