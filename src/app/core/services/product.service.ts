@@ -11,7 +11,7 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.http
 
-      .get<ProductRes>(`${environment.apiUrl}Products?PageSize=100000`)
+      .get<ProductRes>(`${environment.apiUrl}Products`)
       .pipe(map((product: ProductRes) => product.data));
   }
 
@@ -20,8 +20,7 @@ export class ProductService {
       .get<ProductRes>(`${environment.apiUrl}Products?Sort=saleDesc`)
       .pipe(
         map((product: ProductRes) => {
-          console.log(product);
-          return product.data;
+          return product.data.filter((p) => p.productDiscount !== 0);
         })
       );
   }

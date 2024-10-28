@@ -31,8 +31,8 @@
         <app-svg-icon [path]="arrowRight" />
       </div>
     </div>
-    <p class="product__description">
-      {{ product.productDescription | cutString }}
+    <p class="product__name">
+      {{ product.productName | cutString }}
     </p>
     <div class="product__price">
       <div class="product__likes">stars</div>
@@ -46,11 +46,10 @@
         <p class="discount">{{ product.priceWithDiscount | price }}&#8372;</p>
       </div>
     </div>
-    @if(currentIdx !== null && $index === currentIdx ) {
+
     <div class="product__button">
       <button class="btn btn__primary">До кошика</button>
     </div>
-    }
   </div>
   }
 </div>

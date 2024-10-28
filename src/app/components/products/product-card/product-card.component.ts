@@ -20,8 +20,6 @@ import { PricePipe } from '@core/pipes/price.pipe';
 })
 export class ProductCardComponent implements OnChanges {
   productsInput: InputSignal<Product[]> = input.required();
-  start: InputSignal<number> = input.required();
-  end: InputSignal<number> = input.required();
 
   products: Product[] = [];
   currentImage = 0;
@@ -40,7 +38,7 @@ export class ProductCardComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.productsInput()?.length) {
-      this.products = this.productsInput()?.slice(this.start(), this.end());
+      this.products = this.productsInput();
     }
   }
 

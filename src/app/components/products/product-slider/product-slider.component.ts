@@ -22,6 +22,7 @@ export class ProductSliderComponent implements OnInit, OnDestroy {
   advProducts: AdvSlider[] = [];
   private timerId!: ReturnType<typeof setInterval>;
   private isBrowser!: boolean;
+
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.advProducts = advSlider;

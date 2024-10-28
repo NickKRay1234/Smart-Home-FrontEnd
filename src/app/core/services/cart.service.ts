@@ -9,7 +9,7 @@ export class CartService {
   private apiUrl = environment.apiUrl;
   private httpClient = inject(HttpClient);
 
-  getCart(): Observable<Cart> {
-    return this.httpClient.get<Cart>(`${this.apiUrl}ShoppingCart`);
+  getCart(): Observable<Cart[]> {
+    return this.httpClient.get<Cart[]>(`${this.apiUrl}ShoppingCart`);
   }
 }
