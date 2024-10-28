@@ -61,11 +61,6 @@
 
 /* medium */
 @media (max-width: 1280px) {
-  .products__items {
-    /* width: 704px; */
-    align-items: center;
-  }
-
   .products__cards {
     display: flex;
     flex-wrap: wrap;
