@@ -153,10 +153,6 @@
     min-width: 142px;
   }
 
-  .product__button {
-    min-width: 142px;
-  }
-
   .product__item-image {
     width: 160px;
     /* padding: 0 10px; */
@@ -207,10 +203,6 @@
     max-width: 260px;
     min-width: 142px;
     padding: 10px;
-  }
-
-  .product__button {
-    min-width: 142px;
   }
 
   .product__item-image {
