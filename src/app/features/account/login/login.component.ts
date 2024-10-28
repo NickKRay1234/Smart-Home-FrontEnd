@@ -6,6 +6,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginRequest } from '../../../shared/models/account/login-request.model';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 import { environment } from '../../../../environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -56,11 +58,6 @@ export class LoginComponent implements OnInit {
     this.authService.isExternalAuth = false;
     this.authService.login(this.model).subscribe({
       next: (response) => {
-        if (response.isAuthSuccessful = false) {
-          this.showError = true;
-          this.errorMessage = response.errorMessage;
-        }
-
         this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
         this.authService.getUserInfo().subscribe({
           next: (user) => {
