@@ -1,1 +1,37 @@
-<p>register works!</p>
+<div class="wrapper">
+    <div class="frame">
+        <a href="/" class="close-icon">
+            <img src="assets/tabler-icon-x.png" alt="Close">
+        </a>
+
+        <h2>Реєстрація</h2>
+
+        <div class="container">
+            <form class="register-form" #form="ngForm">
+                <input type="text" name="user" id="user" placeholder="Ім'я та прізвище" [(ngModel)]="model.firstName">
+                @if (showError) {
+                    <div class="alert">{{errorMessage}}</div>
+                }
+                <input type="email" name="email" id="email" placeholder="Електронна пошта" [(ngModel)]="model.email">
+                @if (showError) {
+                    <div class="alert">{{errorMessage}}</div>
+                }
+                <input type="password" name="pwd" id="pwd" placeholder="Пароль" [(ngModel)]="model.password">
+                @if (showError) {
+                    <div class="alert">{{errorMessage}}</div>
+                }
+                <button class="register" (click)="onFormSubmit()">Зареєструватися</button>
+            </form>
+
+            <div class="check">
+                <label for="eula">
+                    <input type="checkbox">
+                </label>
+                <h4>Хочу отримувати повідомлення на електору пошту з інформацією про новини та знижки</h4>
+            </div>
+
+            <h6>Реєструючись, ви погоджуєтесь з ліцензійною угодою</h6>
+
+        </div>
+    </div>
+</div>
