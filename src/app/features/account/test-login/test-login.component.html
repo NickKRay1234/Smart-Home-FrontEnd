@@ -7,7 +7,7 @@
         <h2>Вхід</h2>
 
         <div class="container">
-            <form [formGroup]="loginForm" (submit)="onFormSubmit()">
+            <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
                 <input formControlName="email" id="name" type="email" placeholder="Електронна пошта"/>
                 <app-control-messages [control]="loginForm.get('email')"></app-control-messages>
 

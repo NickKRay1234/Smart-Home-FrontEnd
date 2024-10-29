@@ -4,8 +4,8 @@ import { ControlMessagesComponent } from '../../../shared/control-messages/contr
 import { ValidationService } from '../../../core/services/validation.service';
 import { AccountService } from '../../../core/services/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from 'express';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CredentialResponse } from 'google-one-tap';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { environment } from '../../../../environments/environment';
@@ -13,7 +13,7 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-test-login',
   standalone: true,
-  imports: [ReactiveFormsModule, ControlMessagesComponent],
+  imports: [ReactiveFormsModule, ControlMessagesComponent, RouterLink],
   templateUrl: './test-login.component.html',
   styleUrl: './test-login.component.css'
 })
@@ -56,10 +56,6 @@ export class TestLoginComponent {
   }
 
   onFormSubmit() {
-    if (this.loginForm.dirty && this.loginForm.valid) {
-      alert(`Email: ${this.loginForm.value.email} Password: ${this.loginForm.value.password}`);
-    }
-
     this.authService.isExternalAuth = false;
     this.authService.login(this.loginForm).subscribe({
       next: (response) => {

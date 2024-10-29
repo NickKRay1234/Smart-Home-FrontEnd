@@ -10,7 +10,9 @@ import { User } from '../shared/models/account/user';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {  
+export class HeaderComponent implements OnInit {
+  private router = inject(Router);
+  private authService = inject(AccountService);
 
   constructor(private _ngZone: NgZone) {}
   user?: User;
@@ -24,9 +26,6 @@ export class HeaderComponent implements OnInit {
 
     this.user = this.authService.retrieveStorageUser();
   }
-
-  private router = inject(Router);
-  authService = inject(AccountService);
 
   onLogout() {
     this.authService.logout();

@@ -154,6 +154,9 @@ input[type="checkbox"] {
     width: 24px;
 }
 
-/* input[type="checkbox"]:checked {
-    
-} */
+input[type="checkbox"]:checked {
+    stroke: #0EE606;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
