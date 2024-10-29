@@ -1,37 +1,39 @@
-import { Component, inject, NgZone, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { Component, inject, NgZone } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ControlMessagesComponent } from '../../../shared/control-messages/control-messages.component';
+import { ValidationService } from '../../../core/services/validation.service';
 import { AccountService } from '../../../core/services/account.service';
-import { SsrCookieService } from 'ngx-cookie-service-ssr';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { LoginRequest } from '../../../shared/models/account/login-request.model';
-import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
-import { environment } from '../../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from 'express';
+import { CredentialResponse } from 'google-one-tap';
+import { SsrCookieService } from 'ngx-cookie-service-ssr';
+import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-test-login',
   standalone: true,
-  imports: [FormsModule, RouterLink],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  imports: [ReactiveFormsModule, ControlMessagesComponent],
+  templateUrl: './test-login.component.html',
+  styleUrl: './test-login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class TestLoginComponent {
+  private formBuilder = inject(FormBuilder);
   private authService = inject(AccountService);
   private cookies = inject(SsrCookieService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
 
   returnUrl = '';
-  model: LoginRequest;
-  errorMessage: any;
-  showError: boolean = false;
+  loginForm: any;
 
   constructor(private _ngZone: NgZone) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, ValidationService.emailValidator]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
     const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
     if (url) this.returnUrl = url;
-    this.model = {
-      email: '', password: '', clientURI: ''
-    };
   }
 
   ngOnInit(): void {
@@ -54,8 +56,12 @@ export class LoginComponent implements OnInit {
   }
 
   onFormSubmit() {
+    if (this.loginForm.dirty && this.loginForm.valid) {
+      alert(`Email: ${this.loginForm.value.email} Password: ${this.loginForm.value.password}`);
+    }
+
     this.authService.isExternalAuth = false;
-    this.authService.login(this.model).subscribe({
+    this.authService.login(this.loginForm).subscribe({
       next: (response) => {
         this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
         this.authService.getUserInfo().subscribe({

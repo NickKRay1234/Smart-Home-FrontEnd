@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <div class="frame">
+        <a href="/" class="close-icon">
+            <img src="assets/tabler-icon-x.png" alt="Close">
+        </a>
+
+        <h2>Вхід</h2>
+
+        <div class="container">
+            <form [formGroup]="loginForm" (submit)="onFormSubmit()">
+                <input formControlName="email" id="name" type="email" placeholder="Електронна пошта"/>
+                <app-control-messages [control]="loginForm.get('email')"></app-control-messages>
+
+                <input formControlName="password" id="password" type="password" placeholder="Пароль"/>
+                <app-control-messages [control]="loginForm.get('password')"></app-control-messages>
+
+                <button class="login" type="submit" [disabled]="!loginForm.valid">Увійти</button>
+            </form>
+
+            <div class="social">
+                <h4>Або увійти через</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com" class="facebook">
+                        <img src="assets/facebook.png" alt="facebook">
+                    </a>
+                    <!-- <a class="google" (click)="externalLogin()">
+                    </a> -->
+                    <div id="google">
+                        <!-- <img src="/assets/google.png" alt="Google"> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="redirect">
+                <div class="register">
+                    <a routerLink="../register">Зареєструватися</a>
+                </div>
+                <h6>
+                    Забули пароль?
+                    <a href="#" class="restore">Відновити</a>
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
+

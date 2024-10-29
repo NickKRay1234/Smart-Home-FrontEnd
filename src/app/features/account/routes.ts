@@ -9,5 +9,10 @@ export const accountRoutes: Routes = [
     {
         path: 'register',
         loadComponent: () => import('./register/register.component').then((mod) => mod.RegisterComponent)
+    },
+
+    {
+        path: 'test-login',
+        loadComponent: () => import('./test-login/test-login.component').then((mod) => mod.TestLoginComponent)
     }
 ];
