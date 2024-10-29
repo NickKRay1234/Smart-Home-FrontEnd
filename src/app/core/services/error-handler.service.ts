@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 export class ErrorHandlerService {
   handleError<T>(operation: string, result?: T) {
     return (error: any): Observable<T> => {
+      console.log(operation);
       console.error(error);
       return of(result as T);
     };
