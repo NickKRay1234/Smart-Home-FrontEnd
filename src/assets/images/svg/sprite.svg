@@ -15,6 +15,7 @@
 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_595_3259"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_595_3259" result="shape"/>
 </filter>
+
 </defs>
 </symbol>
 </defs>
