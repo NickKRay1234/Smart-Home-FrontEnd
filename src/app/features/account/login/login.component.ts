@@ -1,5 +1,5 @@
 import { Component, inject, NgZone, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 import { AccountService } from '../../../core/services/account.service';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { environment } from '../../../../environments/environment';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
   private authService = inject(AccountService);
@@ -29,71 +29,93 @@ export class LoginComponent implements OnInit {
     const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
     if (url) this.returnUrl = url;
     this.model = {
-      email: '', password: '', clientURI: ''
+      email: '',
+      password: '',
+      clientURI: '',
     };
   }
 
   ngOnInit(): void {
-    // @ts-ignore 
+    // @ts-ignore
     google.accounts.id.initialize({
       client_id: environment.clientId,
       callback: this.handleCredentialResponse.bind(this),
       auto_select: false,
       cancel_on_tap_outside: true,
-      use_fedcm_for_prompt: true
+      use_fedcm_for_prompt: true,
     });
     // @ts-ignore
     google.accounts.id.renderButton(
       // @ts-ignore
       document.getElementById('google'),
-      { type: 'icon', theme: "outline", size: "medium", shape: 'pill' }
+      { type: 'icon', theme: 'outline', size: 'medium', shape: 'pill' }
     );
     // @ts-ignore
-    google.accounts.id.prompt((notification: PromptMomentNotification) => { });
+    google.accounts.id.prompt((notification: PromptMomentNotification) => {});
   }
 
   onFormSubmit() {
     this.authService.isExternalAuth = false;
     this.authService.login(this.model).subscribe({
       next: (response) => {
-        if (response.isAuthSuccessful = false) {
+        if ((response.isAuthSuccessful = false)) {
           this.showError = true;
           this.errorMessage = response.errorMessage;
         }
 
-        this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
+        this.cookies.set(
+          'Authorization',
+          `Bearer ${response.token}`,
+          undefined,
+          '/',
+          undefined,
+          true,
+          'Strict'
+        );
         this.authService.getUserInfo().subscribe({
           next: (user) => {
             this.authService.setStorageUser(user);
-          }
+          },
         });
         this.router.navigateByUrl(this.returnUrl);
-      }
+      },
     });
   }
 
-   async handleCredentialResponse(response: CredentialResponse) {
-    this.authService.externalLogin({
-       idToken: response.credential,
-       provider: "google"
-     }).subscribe({
-       next: (resp) => {
-        if (resp.isAuthSuccessful = false) {
-          this.showError = true;
-          this.errorMessage = resp.errorMessage;
-        }
+  async handleCredentialResponse(response: CredentialResponse) {
+    this.authService
+      .externalLogin({
+        idToken: response.credential,
+        provider: 'google',
+      })
+      .subscribe({
+        next: (resp) => {
+          if ((resp.isAuthSuccessful = false)) {
+            this.showError = true;
+            this.errorMessage = resp.errorMessage;
+          }
 
-         this.cookies.set('Authorization', `Bearer ${resp.token}`, undefined, '/', undefined, true, 'Strict');
-         this.authService.sendAuthStateChangeNotification(resp.isAuthSuccessful);
-         this.authService.getUserInfo().subscribe({
-           next: (user) => {
-             this.authService.setStorageUser(user);
-           }
-         });
-         this._ngZone.run(() => {
-           this.router.navigateByUrl(this.returnUrl);
-         });
-       }
-     });
+          this.cookies.set(
+            'Authorization',
+            `Bearer ${resp.token}`,
+            undefined,
+            '/',
+            undefined,
+            true,
+            'Strict'
+          );
+          this.authService.sendAuthStateChangeNotification(
+            resp.isAuthSuccessful
+          );
+          this.authService.getUserInfo().subscribe({
+            next: (user) => {
+              this.authService.setStorageUser(user);
+            },
+          });
+          this._ngZone.run(() => {
+            this.router.navigateByUrl(this.returnUrl);
+          });
+        },
+      });
   }
 }

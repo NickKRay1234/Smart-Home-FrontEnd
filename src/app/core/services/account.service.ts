@@ -40,20 +40,13 @@ export class AccountService {
   externalLogin(request: ExternalAuth): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
       this.baseUrl + 'accounts/ExternalLogin',
-      {
-        provider: request.provider,
-        idToken: request.idToken,
-      }
+      request
     );
   }
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(this.baseUrl + 'accounts/login', {
-        email: request.email,
-        password: request.password,
-        clientURI: this.document.location.hostname,
-      })
+      .post<LoginResponse>(this.baseUrl + 'accounts/login', request)
       .pipe(
         catchError(this.errorHandler.handleError<LoginResponse>('login err'))
       );
@@ -61,13 +54,10 @@ export class AccountService {
 
   register(request: RegisterRequest): Observable<RegistrationResponse> {
     return this.http
-      .post<RegistrationResponse>(this.baseUrl + 'accounts/registration', {
-        firstName: request.firstName,
-        lastName: request.lastName,
-        email: request.email,
-        password: request.password,
-        clientURI: this.document.location.hostname,
-      })
+      .post<RegistrationResponse>(
+        this.baseUrl + 'accounts/registration',
+        request
+      )
       .pipe(
         catchError(
           this.errorHandler.handleError<RegistrationResponse>(
