@@ -65,7 +65,7 @@ h5 {
 
 /* common style for buttons */
 .btn {
-  border: 2px solid transparent;
+  border: none;
   border-radius: 44px;
   padding: 10px 20px;
   /* min-width: 106px;
