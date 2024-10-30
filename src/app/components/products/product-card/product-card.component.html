@@ -35,7 +35,20 @@
       {{ product.productName | cutString }}
     </p>
     <div class="product__price">
-      <div class="product__likes">stars</div>
+      <div class="product__likes">
+        @for (star of stars; track $index) {
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          [attr.fill]="rating > $index ? color : 'none'"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <use xlink:href="assets/images/svg/sprite.svg#star"></use>
+        </svg>
+        <!-- <app-svg-icon class="icon__star" [path]="star" /> -->
+        }
+      </div>
       <div class="product__price-item">
         @if(product.productDiscount) {
         <div class="price__wrapper">

@@ -27,6 +27,15 @@ export class ProductCardComponent implements OnChanges {
   heart = 'assets/images/svg/heart.svg';
   arrowLeft = 'assets/images/svg/left-arrow.svg';
   arrowRight = 'assets/images/svg/right-arrow.svg';
+  stars = [
+    'assets/images/svg/star-fill.svg',
+    'assets/images/svg/star-fill.svg',
+    'assets/images/svg/star-fill.svg',
+    'assets/images/svg/star-fill.svg',
+    'assets/images/svg/star.svg',
+  ];
+  rating = Math.floor(500 / 115);
+  color = '#FADC93';
 
   onMouseEnter(i: number) {
     this.currentIdx = i;

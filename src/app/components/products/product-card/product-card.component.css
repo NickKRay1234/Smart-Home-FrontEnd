@@ -59,7 +59,16 @@
 }
 
 .product__likes {
+  display: flex;
   align-self: self-end;
+  gap: 2px;
+  height: 10px;
+}
+
+.icon__star,
+svg {
+  width: 10px;
+  height: 10px;
 }
 
 .product__button {

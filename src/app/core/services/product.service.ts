@@ -1,18 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { Product, ProductRes } from '../../shared/models/product/product';
+import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable()
 export class ProductService {
   private http = inject(HttpClient);
+  private errorHandler = inject(ErrorHandlerService);
 
   getProducts(): Observable<Product[]> {
-    return this.http
-
-      .get<ProductRes>(`${environment.apiUrl}Products`)
-      .pipe(map((product: ProductRes) => product.data));
+    return this.http.get<ProductRes>(`${environment.apiUrl}Products`).pipe(
+      map((product: ProductRes) => product.data),
+      catchError(
+        this.errorHandler.handleError<Product[]>('Помилка отримання продуктів!')
+      )
+    );
   }
 
   getDiscountProducts(): Observable<Product[]> {
@@ -21,7 +25,12 @@ export class ProductService {
       .pipe(
         map((product: ProductRes) => {
           return product.data.filter((p) => p.productDiscount !== 0);
-        })
+        }),
+        catchError(
+          this.errorHandler.handleError<Product[]>(
+            'Помилка отримання продуктів зі знижкою!'
+          )
+        )
       );
   }
 }
