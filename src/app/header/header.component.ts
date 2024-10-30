@@ -2,15 +2,16 @@ import { Component, inject, NgZone, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AccountService } from '../core/services/account.service';
 import { User } from '../shared/models/account/user';
+import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive,SvgIconComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {  
+export class HeaderComponent implements OnInit {
 
   constructor(private _ngZone: NgZone) {}
   user?: User;
