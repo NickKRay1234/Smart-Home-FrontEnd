@@ -1,4 +1,9 @@
 <div class="center">
+  @if (alert.getAlert()) {
+  <div class="alert">
+    {{ alert.getAlert().message }}
+  </div>
+  }
   <app-header />
   <div class="container">
     <router-outlet />

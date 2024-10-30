@@ -3,6 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+.alert {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 36px;
+  color: red;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  text-align: center;
+}
 
 .center {
   margin-left: auto;
