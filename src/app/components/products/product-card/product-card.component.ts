@@ -1,5 +1,6 @@
 import {
   Component,
+  inject,
   input,
   InputSignal,
   OnChanges,
@@ -10,6 +11,7 @@ import { CutStringPipe } from '../../../core/pipes/cut-string.pipe';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
 import { NgClass, NgIf } from '@angular/common';
 import { PricePipe } from '@core/pipes/price.pipe';
+import { CartService } from '@core/services/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -17,9 +19,12 @@ import { PricePipe } from '@core/pipes/price.pipe';
   imports: [CutStringPipe, SvgIconComponent, NgClass, NgIf, PricePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
+  providers: [CartService],
 })
 export class ProductCardComponent implements OnChanges {
   productsInput: InputSignal<Product[]> = input.required();
+
+  private cartService = inject(CartService);
 
   products: Product[] = [];
   currentImage = 0;
@@ -36,14 +41,7 @@ export class ProductCardComponent implements OnChanges {
   ];
   rating = Math.floor(500 / 115);
   color = '#FADC93';
-
-  onMouseEnter(i: number) {
-    this.currentIdx = i;
-  }
-
-  onMouseLeave(i: number) {
-    this.currentIdx = null;
-  }
+  iconUrl = 'url(#gradient)';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.productsInput()?.length) {
@@ -78,5 +76,9 @@ export class ProductCardComponent implements OnChanges {
     } else {
       this.products[idx].favorite = false;
     }
+  }
+
+  addToCart(idx: number): void {
+    // this.cartService.addToCart(this.products[idx]);
   }
 }

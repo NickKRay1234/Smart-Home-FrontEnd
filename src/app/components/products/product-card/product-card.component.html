@@ -1,10 +1,6 @@
 <div class="product__card">
   @for (product of products; track $index) {
-  <div
-    class="product__item"
-    (mouseenter)="onMouseEnter($index)"
-    (mouseleave)="onMouseLeave($index)"
-  >
+  <div class="product__item">
     <div class="product__image">
       <img
         class="product__item-image"
@@ -18,11 +14,42 @@
         class="product__like"
         (click)="addFavorite(product.productId, $index)"
       >
-        <app-svg-icon
+        <svg
+          [ngClass]="{ clicked: product.favorite }"
+          [attr.fill]="product.favorite ? iconUrl : 'none'"
+          class="icon__heart"
+        >
+          <use xlink:href="assets/images/svg/sprite.svg#heart"></use>
+          <defs>
+            <linearGradient
+              id="gradient"
+              x1="20.9964"
+              y1="11.9943"
+              x2="2.98706"
+              y2="11.9943"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#FF9E9E" />
+              <stop offset="1" stop-color="#FADC93" />
+            </linearGradient>
+            <linearGradient
+              id="gradient_hover"
+              x1="20.9964"
+              y1="11.9943"
+              x2="2.98706"
+              y2="11.9943"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#FF9E9E" />
+              <stop offset="1" stop-color="#FADC93" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <!-- <app-svg-icon
           [path]="
             product.favorite ? 'assets/images/svg/heart-active.svg' : heart
           "
-        />
+        /> -->
       </div>
       <div class="arrow__left" (click)="slideLeft($index)">
         <app-svg-icon [path]="arrowLeft" />
@@ -62,7 +89,9 @@
     </div>
 
     <div class="product__button">
-      <button class="btn btn__primary">До кошика</button>
+      <button class="btn btn__primary" (click)="addToCart($index)">
+        До кошика
+      </button>
     </div>
   </div>
   }

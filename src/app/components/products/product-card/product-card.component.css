@@ -64,6 +64,19 @@
   gap: 2px;
 }
 
+.icon__heart {
+  width: 24px;
+  height: 24px;
+  stroke: var(--g3);
+}
+.icon__heart.clicked {
+  stroke: none;
+}
+
+.icon__heart:hover {
+  stroke: #fadc93;
+}
+
 .icon__star,
 svg {
   width: 10px;

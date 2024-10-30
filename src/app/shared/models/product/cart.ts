@@ -1,20 +1,21 @@
 export interface Cart {
   id: string;
-  items: [
-    {
-      productId: number;
-      productName: string;
-      price: number;
-      quantity: number;
-      pictureUrl: string;
-    }
-  ];
+  items: CartItems[];
   deliveryMethodId: number;
   clientSecret: string;
   paymentIntentId: string;
 }
 
-export interface CartResponse extends Cart {
+export interface CartResponse {
+  data: Cart;
   isSuccess: boolean;
   message: string;
+}
+
+export interface CartItems {
+  productId: number;
+  productName: string;
+  price: number;
+  quantity: number;
+  pictureUrl: string;
 }
