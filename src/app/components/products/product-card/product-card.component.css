@@ -95,6 +95,7 @@ svg {
 
 .product__button {
   padding-bottom: 10px;
+  height: 43px;
 }
 
 .price {
@@ -176,6 +177,9 @@ svg {
   .product__card:first-child {
     padding-left: 12px;
   }
+  .product__button {
+    height: 40px;
+  }
 }
 /* small */
 @media (max-width: 744px) {
@@ -226,6 +230,7 @@ svg {
   .product__button {
     /* padding-top: 15px; */
     padding-bottom: 10px;
+    height: 32px;
   }
 }
 /* extra small */
