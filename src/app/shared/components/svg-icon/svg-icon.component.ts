@@ -11,9 +11,10 @@ export class SvgIconComponent {
   @HostBinding('style.-webkit-mask-image')
   private _path!: string;
 
-  @HostListener('mouseenter', ['$event.target']) onMouseEnter(
-    target: HTMLElement
-  ) {
+  @HostBinding('attr.fill') private _fill = '';
+
+  @HostListener('mouseenter', ['$event.target'])
+  onMouseEnter(target: HTMLElement) {
     target.style.backgroundImage = 'linear-gradient(to left, #ff9e9e, #fadc93)';
   }
   @HostListener('mouseleave', ['$event.target']) onMouseLeave(
@@ -22,7 +23,10 @@ export class SvgIconComponent {
     target.style.backgroundImage = '';
   }
 
-  @Input() color!: string;
+  @Input() public set fill(color: string) {
+    console.log(this._fill);
+    this._fill = color;
+  }
 
   @Input()
   public set path(filePath: string) {
