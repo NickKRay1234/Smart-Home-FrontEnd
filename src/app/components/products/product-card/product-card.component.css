@@ -62,13 +62,22 @@
   display: flex;
   align-self: self-end;
   gap: 2px;
-  height: 10px;
 }
 
 .icon__star,
 svg {
   width: 10px;
   height: 10px;
+  align-self: center;
+}
+
+.rating {
+  font-family: Tenor Sans;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.38px;
+  text-align: left;
+  color: var(--g1);
 }
 
 .product__button {
