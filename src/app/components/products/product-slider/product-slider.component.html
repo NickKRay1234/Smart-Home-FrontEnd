@@ -2,23 +2,23 @@
   <div class="slider" (mouseenter)="stopAutoPlay()" (mouseleave)="autoPlay()">
     <div class="slider__wrapper">
       <div class="slider__content">
-        <h1>{{ advProducts[selectedIdx].tittle }}</h1>
+        <h1>{{ advProducts[selectedIdx].productName }}</h1>
         <p class="price__percent-disc">
-          -{{ advProducts[selectedIdx].discount }}%
+          -{{ advProducts[selectedIdx].productDiscount }}%
         </p>
         <div class="price__wrapper">
           <p class="price__line-through">
-            {{ advProducts[selectedIdx].price | price }}&#8372;
+            {{ advProducts[selectedIdx].productPrice | price }}&#8372;
           </p>
           <div class="line__one"></div>
           <div class="line__two"></div>
         </div>
         <p class="price__discount">
-          {{ advProducts[selectedIdx].discountPrice | price }}&#8372;
+          {{ advProducts[selectedIdx].priceWithDiscount | price }}&#8372;
         </p>
       </div>
       <div class="slider__image">
-        <img [src]="advProducts[selectedIdx].image" alt="" />
+        <img [src]="advProducts[selectedIdx].images[0].imageUrl" alt="" />
       </div>
     </div>
 

@@ -2,6 +2,8 @@ import { isPlatformBrowser, NgClass } from '@angular/common';
 import {
   Component,
   Inject,
+  input,
+  InputSignal,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
@@ -9,6 +11,8 @@ import {
 
 import { AdvSlider, advSlider } from '@shared/configs/adv-slider.config';
 import { PricePipe } from '@core/pipes/price.pipe';
+import { randomAdv } from '@shared/tools/random-adv';
+import { Product } from '@shared/models/product/product';
 
 @Component({
   selector: 'app-product-slider',
@@ -19,17 +23,19 @@ import { PricePipe } from '@core/pipes/price.pipe';
 })
 export class ProductSliderComponent implements OnInit, OnDestroy {
   selectedIdx!: number;
-  advProducts: AdvSlider[] = [];
+  advProducts: Product[] = [];
   private timerId!: ReturnType<typeof setInterval>;
   private isBrowser!: boolean;
+  products: InputSignal<Product[]> = input<Product[]>([]);
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
-    this.advProducts = advSlider;
+
     this.selectedIdx = 0;
   }
 
   ngOnInit(): void {
+    this.advProducts = randomAdv(this.products());
     if (this.isBrowser) {
       this.autoPlay();
     }
