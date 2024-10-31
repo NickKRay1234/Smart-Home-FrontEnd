@@ -4,12 +4,13 @@ import {
   Inject,
   input,
   InputSignal,
+  OnChanges,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
+  SimpleChanges,
 } from '@angular/core';
 
-import { AdvSlider, advSlider } from '@shared/configs/adv-slider.config';
 import { PricePipe } from '@core/pipes/price.pipe';
 import { randomAdv } from '@shared/tools/random-adv';
 import { Product } from '@shared/models/product/product';
