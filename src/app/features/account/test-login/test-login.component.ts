@@ -3,12 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ControlMessagesComponent } from '../../../shared/control-messages/control-messages.component';
 import { ValidationService } from '../../../core/services/validation.service';
 import { AccountService } from '../../../core/services/account.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { CredentialResponse } from 'google-one-tap';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { environment } from '../../../../environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-test-login',
@@ -26,6 +26,8 @@ export class TestLoginComponent {
 
   returnUrl = '';
   loginForm: any;
+  showError: boolean = false;
+  errorMessage: string = '';
 
   constructor(private _ngZone: NgZone) {
     this.loginForm = this.formBuilder.group({
@@ -57,8 +59,7 @@ export class TestLoginComponent {
 
   onFormSubmit() {
     this.authService.isExternalAuth = false;
-    this.authService.login(this.loginForm).subscribe({
-      next: (response) => {
+    this.authService.login(this.loginForm.value).subscribe(response => {
         this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
         this.authService.getUserInfo().subscribe({
           next: (user) => {
@@ -67,10 +68,11 @@ export class TestLoginComponent {
         });
         this.router.navigateByUrl(this.returnUrl);
       },
-      error(err: HttpErrorResponse) {
-         alert(err.error.errorMessage);
-      }
-    });
+      error => {
+        this.showError = true;
+        this.errorMessage = error.error.errorMessage;
+        console.log(this.errorMessage);
+      });
   }
 
    async handleCredentialResponse(response: CredentialResponse) {

@@ -26,7 +26,6 @@ export class AccountService {
   authChanged = this.authChangeSub.asObservable();
   isExternalAuth: boolean = false;
   $user = new BehaviorSubject<User | undefined>(undefined);
-  errResponse: string = '';
 
   constructor(@Inject(DOCUMENT) private document: any) {}
 
@@ -47,7 +46,6 @@ export class AccountService {
       password: request.password,
       clientURI: this.document.location.hostname
     });
-    // .pipe(catchError(this.handleError));
   }
 
   register(request: RegisterRequest): Observable<RegistrationResponse> {
@@ -117,7 +115,6 @@ export class AccountService {
     //   `Backend returned code ${error.status}, ` +
     //   `body was: ${JSON.stringify(error.error)}`);
     // return an observable with a user-facing error message
-    this.errResponse = error.error.errorMessage;
     return throwError(() => new Error(error.error.errorMessage));
   };
 }

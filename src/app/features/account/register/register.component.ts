@@ -44,6 +44,10 @@ export class RegisterComponent {
           this.errorMessage = response.errors;
         }
         this.router.navigateByUrl(this.returnUrl);
+      },
+      error: (err) => {
+        this.showError = true;
+        this.errorMessage = err.error.errors;
       }
     });
   }
