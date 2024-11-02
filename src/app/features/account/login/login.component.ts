@@ -1,36 +1,40 @@
-import { Component, inject, NgZone, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { Component, inject, NgZone } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ControlMessagesComponent } from '../../../shared/control-messages/control-messages.component';
+import { ValidationService } from '../../../core/services/validation.service';
 import { AccountService } from '../../../core/services/account.service';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { CredentialResponse } from 'google-one-tap';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { LoginRequest } from '../../../shared/models/account/login-request.model';
-import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-test-login',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [ReactiveFormsModule, ControlMessagesComponent, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class TestLoginComponent {
+  private formBuilder = inject(FormBuilder);
   private authService = inject(AccountService);
   private cookies = inject(SsrCookieService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
 
   returnUrl = '';
-  model: LoginRequest;
-  errorMessage: any;
+  loginForm: any;
   showError: boolean = false;
+  errorMessage: string = '';
 
   constructor(private _ngZone: NgZone) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, ValidationService.emailValidator]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
     const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
     if (url) this.returnUrl = url;
-    this.model = {
-      email: '', password: '', clientURI: ''
-    };
   }
 
   ngOnInit(): void {
@@ -54,20 +58,20 @@ export class LoginComponent implements OnInit {
 
   onFormSubmit() {
     this.authService.isExternalAuth = false;
-    this.authService.login(this.model).subscribe({
+    this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        if (response.isAuthSuccessful === false) {
-          this.showError = true;
-          this.errorMessage = response.errorMessage;
-        }
-
-        this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
-        this.authService.getUserInfo().subscribe({
-          next: (user) => {
-            this.authService.setStorageUser(user);
-          }
-        });
-        this.router.navigateByUrl(this.returnUrl);
+          this.cookies.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
+          this.authService.getUserInfo().subscribe({
+            next: (user) => {
+              this.authService.setStorageUser(user);
+            }
+          });
+          this.router.navigateByUrl(this.returnUrl);
+      },
+      error: (err) => {
+        this.showError = true;
+        this.errorMessage = err.error.errorMessage;
+        console.log(err.error.errorMessage); 
       }
     });
   }
@@ -78,11 +82,6 @@ export class LoginComponent implements OnInit {
        provider: "google"
      }).subscribe({
        next: (resp) => {
-        // if (resp.isAuthSuccessful = false) {
-        //   this.showError = true;
-        //   this.errorMessage = resp.errorMessage;
-        // }
-
          this.cookies.set('Authorization', `Bearer ${resp.token}`, undefined, '/', undefined, true, 'Strict');
          this.authService.sendAuthStateChangeNotification(resp.isAuthSuccessful);
          this.authService.getUserInfo().subscribe({
@@ -93,6 +92,11 @@ export class LoginComponent implements OnInit {
          this._ngZone.run(() => {
            this.router.navigateByUrl(this.returnUrl);
          });
+       },
+       error: (err) => {
+        this.showError = true;
+        this.errorMessage = err.error.errorMessage;
+        console.log(err.error.errorMessage);
        }
      });
   }

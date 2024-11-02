@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* 100% of the viewport height */
+}
+
+.frame {
+    width: 400px;
+    position: relative;
+    border-radius: 20px;
+    background: #FFF;
+    margin: auto;
+    padding: 5px;
+    /* M3/Elevation Light/1 */
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+.close-icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    flex-shrink: 0;
+    float: right;
+}
+
+.img {
+    width: 48px;
+    margin-top: 60px;
+    margin-left: 176px;
+    flex-shrink: 0;
+}

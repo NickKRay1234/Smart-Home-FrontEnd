@@ -18,7 +18,7 @@ export class RegisterComponent {
 
   returnUrl = '';
   model: RegisterRequest;
-  errorMessage: any;
+  validationErrors?: string[];
   showError: boolean = false;
 
   constructor() {
@@ -39,15 +39,12 @@ export class RegisterComponent {
 
     this.authService.register(this.model).subscribe({
       next: (response) => {
-        if (response.isSuccessfullRegistration = false) {
-          this.showError = true;
-          this.errorMessage = response.errors;
-        }
+        //add shared component;
         this.router.navigateByUrl(this.returnUrl);
       },
       error: (err) => {
         this.showError = true;
-        this.errorMessage = err.error.errors;
+        this.validationErrors = err.error;
       }
     });
   }

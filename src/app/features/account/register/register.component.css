@@ -136,18 +136,24 @@ h6 {
     align-self: stretch;
 }
 
-.alert div {
-    background-color: #fed3d3;
-    color: #820000;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
 .check {
     display: flex;
     align-items: center;
     gap: 20px;
     align-self: stretch;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
 }
 
 input[type="checkbox"] {

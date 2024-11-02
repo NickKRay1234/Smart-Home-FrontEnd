@@ -5,7 +5,7 @@
         </a>
         <nav class="navigation">
             <ul>
-                <li><a href="#">Гарантія</a></li>
+                <li><a routerLink="email">Test</a></li>
                 <li><a href="#">Обмін</a></li>
                 <li><a href="#">Новини</a></li>
                 <li><a href="#">Служба Підтримки</a></li>
@@ -15,7 +15,7 @@
         <div class="user">
             <div class="login">
                 @if (user === undefined) {
-                    <a class="login" routerLink="account/test-login">Увійти</a>
+                    <a class="login" routerLink="account/login">Увійти</a>
                 }
                 @else {
                     <span>{{user.firstName}}</span>

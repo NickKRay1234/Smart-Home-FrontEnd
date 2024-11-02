@@ -1,10 +1,10 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Inject, inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Inject, inject, Injectable } from '@angular/core';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { SessionStorageService } from 'ngx-webstorage';
 import { environment } from '../../../environments/environment';
 import { Address } from 'cluster';
-import { BehaviorSubject, Observable, Subject, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { LoginRequest } from '../../shared/models/account/login-request.model';
 import { LoginResponse } from '../../shared/models/account/login-response.model';
 import { User } from '../../shared/models/account/user';
@@ -54,8 +54,8 @@ export class AccountService {
       lastName: request.lastName,
       email: request.email,
       password: request.password,
-      clientURI: this.document.location.hostname
-    })
+      clientURI: environment.apiUrl + 'account/emailconfirm'
+    });
   }
 
   getUserInfo(): Observable<User> {
@@ -107,14 +107,4 @@ export class AccountService {
     this.$user.next(undefined);
     this.sendAuthStateChangeNotification(false);
   }
-
-  private handleError(error: HttpErrorResponse) {
-    // The backend returned an unsuccessful response code.
-    // The response body may contain clues as to what went wrong,
-    // console.error(
-    //   `Backend returned code ${error.status}, ` +
-    //   `body was: ${JSON.stringify(error.error)}`);
-    // return an observable with a user-facing error message
-    return throwError(() => new Error(error.error.errorMessage));
-  };
 }

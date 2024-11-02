@@ -9,17 +9,21 @@
         <div class="container">
             <form class="register-form" #form="ngForm">
                 <input type="text" name="user" id="user" placeholder="Ім'я та прізвище" [(ngModel)]="model.firstName">
-                @if (showError) {
-                    <div class="alert">{{errorMessage}}</div>
-                }
+
                 <input type="email" name="email" id="email" placeholder="Електронна пошта" [(ngModel)]="model.email">
-                @if (showError) {
-                    <div class="alert">{{errorMessage}}</div>
-                }
+
                 <input type="password" name="pwd" id="pwd" placeholder="Пароль" [(ngModel)]="model.password">
+
                 @if (showError) {
-                    <div class="alert">{{errorMessage}}</div>
+                    <div class="alert">
+                        <ul>
+                            @for (error of validationErrors; track $index) {
+                                <li class="alert-danger">{{error}}</li>
+                            }
+                        </ul>
+                    </div>
                 }
+
                 <button class="register" (click)="onFormSubmit()">Зареєструватися</button>
             </form>
 
