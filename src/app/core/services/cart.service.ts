@@ -11,18 +11,19 @@ export class CartService {
   private httpClient = inject(HttpClient);
   private errorHandler = inject(ErrorHandlerService);
 
-  getCart(): Observable<Cart[]> {
-    return this.httpClient.get<Cart[]>(`${this.apiUrl}ShoppingCart`).pipe(
-      tap((cart) => console.log(cart)),
-      catchError(this.errorHandler.handleError<Cart[]>('Cart error'))
-    );
+  getCart(): Observable<Cart> {
+    return this.httpClient
+      .get<CartResponse>(`${this.apiUrl}ShoppingCart?id=as12`)
+      .pipe(
+        map((res: CartResponse) => res.data),
+        catchError(this.errorHandler.handleError<Cart>('Cart error'))
+      );
   }
 
   addToCart(req: Cart): Observable<Cart> {
     return this.httpClient
       .post<CartResponse>(`${this.apiUrl}ShoppingCart`, req)
       .pipe(
-        tap((res) => console.log(res)),
         map((res: CartResponse) => res.data),
         catchError(this.errorHandler.handleError<Cart>("Wasn't added to cart"))
       );

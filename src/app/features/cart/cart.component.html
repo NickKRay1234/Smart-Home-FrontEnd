@@ -1,0 +1,44 @@
+<div class="cart__container">
+  <div class="cart__header">
+    <h1 class="cart__title">Кошик</h1>
+    <div class="cart__close">
+      <button class="btn__svg" (click)="close()">
+        <!-- <svg class="svg__icon__close">
+          <use xlink:href="assets/images/svg/sprite.svg#closeIcon" />
+        </svg> -->
+        <app-svg-icon
+          class="svg__icon__close"
+          [path]="closeIcon"
+        ></app-svg-icon>
+      </button>
+    </div>
+  </div>
+  <div class="cart__items">
+    @for (cart of carts; track $index) {
+    <div class="item">
+      <div class="item__image">
+        <img [src]="cart.pictureUrl" [alt]="cart.productName" />
+      </div>
+      <div class="item__content__wrap">
+        <div class="item__content">
+          <div class="item__title">
+            <h6>{{ cart.productName }}</h6>
+          </div>
+          <div class="item__btn__delete">
+            <app-svg-icon [path]="deleteIcon"></app-svg-icon>
+          </div>
+        </div>
+        <div class="item__content">
+          <div class="item__quantity">
+            <app-svg-icon class="math__icon" [path]="minusIcon"></app-svg-icon>
+            {{ cart.quantity }}
+            <app-svg-icon class="math__icon" [path]="plusIcon"></app-svg-icon>
+          </div>
+          <div class="item__price">{{ cart.price | price }} &#8372;</div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="cart__footer"></div>
+</div>

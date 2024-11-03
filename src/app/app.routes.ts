@@ -9,7 +9,7 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./components/products/product.routing').then(
+          import('./features/products/product.routing').then(
             (r) => r.PRODUCT_ROUTING
           ),
       },
@@ -23,6 +23,6 @@ export const routes: Routes = [
   {
     path: 'cart',
     loadComponent: () =>
-      import('./components/cart/cart.component').then((c) => c.CartComponent),
+      import('./features/cart/cart.component').then((c) => c.CartComponent),
   },
 ];

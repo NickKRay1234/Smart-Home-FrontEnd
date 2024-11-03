@@ -4,11 +4,9 @@ import {
   Inject,
   input,
   InputSignal,
-  OnChanges,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
-  SimpleChanges,
 } from '@angular/core';
 
 import { PricePipe } from '@core/pipes/price.pipe';

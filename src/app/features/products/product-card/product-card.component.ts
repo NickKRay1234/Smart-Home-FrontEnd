@@ -1,22 +1,27 @@
 import {
   Component,
+  DestroyRef,
   inject,
   input,
   InputSignal,
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgClass } from '@angular/common';
+
 import { Product } from '@shared/models/product/product';
-import { CutStringPipe } from '../../../core/pipes/cut-string.pipe';
+import { CutStringPipe } from '@core/pipes/cut-string.pipe';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
-import { NgClass, NgIf } from '@angular/common';
 import { PricePipe } from '@core/pipes/price.pipe';
 import { CartService } from '@core/services/cart.service';
+import { postCartReq } from '@shared/tools/post-cart-req';
+import { CartStoreService } from '@core/services/cart-store.service';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CutStringPipe, SvgIconComponent, NgClass, NgIf, PricePipe],
+  imports: [CutStringPipe, SvgIconComponent, NgClass, PricePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
   providers: [CartService],
@@ -25,6 +30,8 @@ export class ProductCardComponent implements OnChanges {
   productsInput: InputSignal<Product[]> = input.required();
 
   private cartService = inject(CartService);
+  private destroyRef = inject(DestroyRef);
+  private cartStore = inject(CartStoreService);
 
   products: Product[] = [];
   currentImage = 0;
@@ -79,6 +86,18 @@ export class ProductCardComponent implements OnChanges {
   }
 
   addToCart(idx: number): void {
-    // this.cartService.addToCart(this.products[idx]);
+    const { productId, productName, productPrice, images, quantityInStock } =
+      this.products[idx];
+    this.cartStore.updateItems({
+      productId,
+      productName,
+      price: productPrice,
+      quantity: quantityInStock,
+      pictureUrl: images[0].imageUrl,
+    });
+    this.cartService
+      .addToCart(postCartReq(this.cartStore.getCartItems()))
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 }

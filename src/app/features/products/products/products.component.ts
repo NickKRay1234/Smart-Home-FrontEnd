@@ -6,14 +6,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ProductService } from '../../../core/services/product.service';
+import { Router } from '@angular/router';
+import { AsyncPipe, NgClass } from '@angular/common';
+
+import { ProductService } from '@core/services/product.service';
 import { ProductSliderComponent } from '../product-slider/product-slider.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Product } from '@shared/models/product/product';
-import { Slide, slide } from '@shared/tools/slide';
-import { CartComponent } from 'app/components/cart/cart.component';
-import { Router } from '@angular/router';
+import { CartComponent } from '../../cart/cart.component';
+import { resize } from '@shared/tools/resize';
 
 @Component({
   selector: 'app-products',
@@ -43,21 +44,18 @@ export class ProductsComponent implements OnInit {
 
   @HostListener('window:resize') onResize() {
     if (window?.innerWidth) {
-      this.cutDiscountProducts = this.resize(
+      this.cutDiscountProducts = resize(
         this.discountProducts,
         window.innerWidth
       );
-      this.cutNewProducts = this.resize(this.newProducts, window.innerWidth);
-      this.cutBestProducts = this.resize(this.bestProducts, window.innerWidth);
+      this.cutNewProducts = resize(this.newProducts, window.innerWidth);
+      this.cutBestProducts = resize(this.bestProducts, window.innerWidth);
     }
   }
   @HostListener('window:load') onLoad() {
-    this.cutDiscountProducts = this.resize(
-      this.discountProducts,
-      window.innerWidth
-    );
-    this.cutNewProducts = this.resize(this.newProducts, window.innerWidth);
-    this.cutBestProducts = this.resize(this.bestProducts, window.innerWidth);
+    this.cutDiscountProducts = resize(this.discountProducts, window.innerWidth);
+    this.cutNewProducts = resize(this.newProducts, window.innerWidth);
+    this.cutBestProducts = resize(this.bestProducts, window.innerWidth);
   }
 
   ngOnInit(): void {
@@ -66,7 +64,7 @@ export class ProductsComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((prod: Product[]) => {
         this.newProducts = prod;
-        this.bestProducts = prod;
+        this.bestProducts = prod.slice(5);
       });
 
     this.productService
@@ -77,16 +75,16 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  resize(prod: Product[], width: number): Product[] {
-    const step = 5;
-    if (width > 1280 && prod?.length) {
-      return prod.slice(0, step);
-    } else if (width > 744 && prod?.length) {
-      return prod.slice(0, step - 2);
-    } else {
-      return prod.slice(0, step - 3);
-    }
-  }
+  // resize(prod: Product[], width: number): Product[] {
+  //   const step = 5;
+  //   if (width > 1280 && prod?.length) {
+  //     return prod.slice(0, step);
+  //   } else if (width > 744 && prod?.length) {
+  //     return prod.slice(0, step - 2);
+  //   } else {
+  //     return prod.slice(0, step - 3);
+  //   }
+  // }
 
   moreDiscount(): void {
     this.router.navigate(['/discount']);
