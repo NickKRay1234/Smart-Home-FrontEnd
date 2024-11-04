@@ -17,6 +17,7 @@ import { PricePipe } from '@core/pipes/price.pipe';
 import { CartService } from '@core/services/cart.service';
 import { postCartReq } from '@shared/tools/post-cart-req';
 import { CartStoreService } from '@core/services/cart-store.service';
+import { localStor } from '@shared/tools/localStor';
 
 @Component({
   selector: 'app-product-card',
@@ -86,17 +87,8 @@ export class ProductCardComponent implements OnChanges {
   }
 
   addToCart(idx: number): void {
-    const { productId, productName, productPrice, images, quantityInStock } =
-      this.products[idx];
-    this.cartStore.updateItems({
-      productId,
-      productName,
-      price: productPrice,
-      quantity: quantityInStock,
-      pictureUrl: images[0].imageUrl,
-    });
     this.cartService
-      .addToCart(postCartReq(this.cartStore.getCartItems()))
+      .addToCart(postCartReq(localStor(this.products[idx])))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

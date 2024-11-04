@@ -112,6 +112,7 @@
   .slider__wrapper {
     height: 200px;
     border-radius: 23px;
+    padding: 0 22px;
   }
 
   .price__wrapper {

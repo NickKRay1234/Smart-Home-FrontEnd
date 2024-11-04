@@ -93,6 +93,11 @@
   color: var(--cart-title);
 }
 
+.item__quantity > span {
+  width: 40px;
+  padding: 0 10px;
+}
+
 .item__price {
   font-family: Jura;
   font-size: 22px;

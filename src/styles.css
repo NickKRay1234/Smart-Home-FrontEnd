@@ -106,3 +106,7 @@ h5 {
   background-image: linear-gradient(var(--g3), var(--g3));
   color: #91a0a5;
 }
+
+.icon {
+  cursor: pointer;
+}

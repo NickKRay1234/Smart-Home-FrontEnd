@@ -23,11 +23,27 @@ export class CartComponent {
   plusIcon = 'assets/images/svg/tabler-icon-plus.svg';
 
   constructor() {
-    this.cartService.getCart().subscribe((cart: Cart) => {
-      this.carts = cart.items;
-      console.log(cart);
-    });
+    // this.cartService.getCart().subscribe((cart: Cart) => {
+    //   this.carts = cart.items;
+    //   console.log(cart);
+    // });
+    this.carts = JSON.parse(localStorage.getItem('items')!);
   }
 
   close() {}
+
+  deleteItem(idx: number) {}
+
+  decrease(quantity: number, idx: number) {
+    console.log(this.carts[idx]);
+    if (quantity - 1 > 0) {
+      this.carts[idx].quantity = quantity - 1;
+    } else {
+      this.carts[idx].quantity = 0;
+    }
+  }
+
+  increase(quantity: number, idx: number) {
+    this.carts[idx].quantity = quantity + 1;
+  }
 }
