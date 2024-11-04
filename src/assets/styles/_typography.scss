@@ -1,0 +1,25 @@
+@use "./calc";
+
+h1 {
+  font-size: calc.rem(36);
+}
+
+h2 {
+  font-size: calc.rem(30);
+}
+
+h3 {
+  font-family: Jura;
+  font-size: calc.rem(26);
+  font-weight: 600;
+  line-height: 30.76px;
+  text-align: left;
+}
+
+h4 {
+  font-size: calc.rem(32);
+}
+
+h5 {
+  font-size: calc.rem(20);
+}

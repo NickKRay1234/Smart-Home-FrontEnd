@@ -38,6 +38,17 @@
     width: 24px;
     height: 24px;
   }
+
+  &__footer > h3 {
+    text-align: right;
+    padding-bottom: 20px;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: space-between;
+    height: 43px;
+  }
 }
 
 .item {

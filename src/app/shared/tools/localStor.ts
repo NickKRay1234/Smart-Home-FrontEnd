@@ -39,6 +39,37 @@ export function updateLocalStor(cart: CartItems): void {
   }
 }
 
+export function increaseLocalStor() {
+  const cart = localStorage.getItem('items');
+  let cartParsed: CartItems[] = [];
+  if (cart) {
+    cartParsed = JSON.parse(cart);
+  }
+
+  cartParsed.forEach((item: CartItems) => {
+    item.quantity += 1;
+    item.price += item.price;
+  });
+
+  localStorage.setItem('items', JSON.stringify(cartParsed));
+}
+export function decreaseLocalStor() {
+  const cart = localStorage.getItem('items');
+  let cartParsed: CartItems[] = [];
+  if (cart) {
+    cartParsed = JSON.parse(cart);
+  }
+
+  cartParsed.forEach((item: CartItems) => {
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+      item.price -= item.price;
+    }
+  });
+
+  localStorage.setItem('items', JSON.stringify(cartParsed));
+}
+
 export const localStorDel = (prod: CartItems) => {
   if (localStorage.getItem('items')) {
     let cart = JSON.parse(localStorage.getItem('items')!).filter(
@@ -51,9 +82,7 @@ export const localStorDel = (prod: CartItems) => {
 
 export const totalInCart = () => {
   let total = 0;
-  const carts: CartItems[] = JSON.parse(
-    localStorage.getItem('items')!
-  ) as CartItems[];
+  const carts: CartItems[] = JSON.parse(localStorage.getItem('items')!);
   if (carts) {
     total = carts.reduce((a: number, b: CartItems) => a + b.price, 0);
     localStorage.setItem('total', JSON.stringify({ total }));

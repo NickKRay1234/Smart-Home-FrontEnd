@@ -5,6 +5,8 @@ import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component
 import { Cart, CartItems } from '@shared/models/product/cart';
 import { getCartItems } from '@shared/tools/cartSignal';
 import {
+  decreaseLocalStor,
+  increaseLocalStor,
   localStor,
   localStorDel,
   totalInCart,
@@ -51,7 +53,7 @@ export class CartComponent {
   decrease(quantity: number, idx: number) {
     if (quantity - 1 > 0) {
       this.carts[idx].quantity = quantity - 1;
-      updateLocalStor(this.carts[idx]);
+      decreaseLocalStor();
       this.total.set(totalInCart());
     } else {
       this.carts[idx].quantity = 1;
@@ -61,7 +63,7 @@ export class CartComponent {
 
   increase(quantity: number, idx: number) {
     this.carts[idx].quantity = quantity + 1;
-    updateLocalStor(this.carts[idx]);
+    increaseLocalStor();
     this.total.set(totalInCart());
   }
 }
