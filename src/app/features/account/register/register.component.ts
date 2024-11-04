@@ -20,7 +20,8 @@ export class RegisterComponent {
 
   returnUrl = '';
   model: RegisterRequest;
-  validationErrors?: string[];
+  validationEmail?: string[];
+  validationPassword?: string[];
   showError: boolean = false;
   emailConfirm: boolean = false;
 
@@ -47,7 +48,8 @@ export class RegisterComponent {
         if (response.isSuccessfullRegistration) this.emailConfirm = true;
       },
       error: (err) => {
-        
+        if (err.error.errors?.Email) this.validationEmail = err.error.errors.Email;
+        if (err.error.errors?.Password) this.validationPassword = err.error.errors.Password;
         this.showError = true;
       }
     });

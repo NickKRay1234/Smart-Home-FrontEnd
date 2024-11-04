@@ -11,13 +11,21 @@
                 <input type="text" name="user" id="user" placeholder="Ім'я та прізвище" [(ngModel)]="model.firstName">
 
                 <input type="email" name="email" id="email" placeholder="Електронна пошта" [(ngModel)]="model.email">
-
-                <input type="password" name="pwd" id="pwd" placeholder="Пароль" [(ngModel)]="model.password">
-
                 @if (showError) {
                     <div class="alert">
                         <ul>
-                            @for (error of validationErrors; track $index) {
+                            @for (error of validationEmail; track $index) {
+                                <li class="alert-danger">{{error}}</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <input type="password" name="pwd" id="pwd" placeholder="Пароль" [(ngModel)]="model.password">
+                @if (showError) {
+                    <div class="alert">
+                        <ul>
+                            @for (error of validationPassword; track $index) {
                                 <li class="alert-danger">{{error}}</li>
                             }
                         </ul>
