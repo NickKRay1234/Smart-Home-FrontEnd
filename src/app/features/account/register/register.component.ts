@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../../core/services/account.service';
 import { RegisterRequest } from '../../../shared/models/account/register-request.model';
 import { FormsModule } from '@angular/forms';
+import { AccountInteractionComponent } from '../account-interaction/account-interaction.component';
+import { log } from 'console';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, AccountInteractionComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -20,6 +22,7 @@ export class RegisterComponent {
   model: RegisterRequest;
   validationErrors?: string[];
   showError: boolean = false;
+  emailConfirm: boolean = false;
 
   constructor() {
     const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
@@ -40,11 +43,12 @@ export class RegisterComponent {
     this.authService.register(this.model).subscribe({
       next: (response) => {
         //add shared component;
-        this.router.navigateByUrl(this.returnUrl);
+        //this.router.navigateByUrl('/email');
+        if (response.isSuccessfullRegistration) this.emailConfirm = true;
       },
       error: (err) => {
+        
         this.showError = true;
-        this.validationErrors = err.error;
       }
     });
   }

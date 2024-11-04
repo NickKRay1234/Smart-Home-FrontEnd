@@ -25,6 +25,11 @@
                 }
 
                 <button class="register" (click)="onFormSubmit()">Зареєструватися</button>
+
+                @if (emailConfirm) {
+                    <app-account-interaction [img]="{ src: 'assets/search.png', alt: 'example'}" txt="Some TEXT" />
+                }
+
             </form>
 
             <div class="check">

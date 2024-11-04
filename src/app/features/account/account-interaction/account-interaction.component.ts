@@ -9,6 +9,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './account-interaction.component.css'
 })
 export class AccountInteractionComponent {
-  img = input.required<string>();
+  img = input.required<{ src: string, alt: string }>();
   txt = input.required<string>();
 }
