@@ -24,7 +24,7 @@ import { localStor } from '@shared/tools/localStor';
   standalone: true,
   imports: [CutStringPipe, SvgIconComponent, NgClass, PricePipe],
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.css',
+  styleUrl: './product-card.component.scss',
   providers: [CartService],
 })
 export class ProductCardComponent implements OnChanges {

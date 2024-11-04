@@ -27,7 +27,7 @@ import { resize } from '@shared/tools/resize';
     CartComponent,
   ],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css',
+  styleUrl: './products.component.scss',
   providers: [ProductService],
 })
 export class ProductsComponent implements OnInit {
@@ -74,17 +74,6 @@ export class ProductsComponent implements OnInit {
         this.discountProducts = prod;
       });
   }
-
-  // resize(prod: Product[], width: number): Product[] {
-  //   const step = 5;
-  //   if (width > 1280 && prod?.length) {
-  //     return prod.slice(0, step);
-  //   } else if (width > 744 && prod?.length) {
-  //     return prod.slice(0, step - 2);
-  //   } else {
-  //     return prod.slice(0, step - 3);
-  //   }
-  // }
 
   moreDiscount(): void {
     this.router.navigate(['/discount']);

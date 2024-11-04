@@ -1,0 +1,44 @@
+@use "./colors";
+
+/* common style for buttons */
+.btn {
+  border: none;
+  border-radius: 44px;
+  padding: 10px 20px;
+  /* min-width: 106px;
+  min-height: 43px; */
+  cursor: pointer;
+}
+/* style for primary buttons */
+.btn__primary {
+  font-family: "Tenor Sans";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--black);
+  background-image: linear-gradient(to left, colors.$bg-img1, colors.$y1);
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn__primary:hover {
+  z-index: 100;
+  border-radius: 40px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(colors.$white, colors.$white),
+    linear-gradient(to left, #91d7cf, #f5fc17);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.3),
+    0 8px 12px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn__primary:active {
+  border: none;
+  background-image: linear-gradient(to left, #fafe0f, colors.$gr2);
+}
+
+.btn__primary__disabled {
+  border: none;
+  background-image: linear-gradient(colors.$g3, colors.$g3);
+  color: #91a0a5;
+}
