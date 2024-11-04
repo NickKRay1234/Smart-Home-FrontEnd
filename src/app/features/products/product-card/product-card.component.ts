@@ -18,6 +18,7 @@ import { CartService } from '@core/services/cart.service';
 import { postCartReq } from '@shared/tools/post-cart-req';
 import { CartStoreService } from '@core/services/cart-store.service';
 import { localStor } from '@shared/tools/localStor';
+import { setCart, updateCartItems } from '@shared/tools/cartSignal';
 
 @Component({
   selector: 'app-product-card',
@@ -87,6 +88,7 @@ export class ProductCardComponent implements OnChanges {
   }
 
   addToCart(idx: number): void {
+    updateCartItems(this.products[idx]);
     this.cartService
       .addToCart(postCartReq(localStor(this.products[idx])))
       .pipe(takeUntilDestroyed(this.destroyRef))

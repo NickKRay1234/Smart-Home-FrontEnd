@@ -3,42 +3,41 @@ import { Product } from '@shared/models/product/product';
 
 export const localStor = (product: Product): CartItems[] => {
   const { productId, productName, productPrice, images } = product;
+
+  const currentItem: CartItems = {
+    productId,
+    productName,
+    price: productPrice,
+    quantity: 1,
+    pictureUrl: images[0].imageUrl,
+  };
+
+  updateLocalStor(currentItem);
+  return JSON.parse(localStorage.getItem('items')!);
+};
+
+export function updateLocalStor(cart: CartItems): void {
   let isInStorage = false;
 
-  const currentItem: CartItems[] = [
-    {
-      productId,
-      productName,
-      price: productPrice,
-      quantity: 1,
-      pictureUrl: images[0].imageUrl,
-    },
-  ];
-
   if (!localStorage.getItem('items')) {
-    localStorage.setItem('items', JSON.stringify(currentItem));
+    localStorage.setItem('items', JSON.stringify(cart));
   } else {
     let localStor = JSON.parse(localStorage.getItem('items')!);
     localStor.forEach((item: CartItems) => {
-      if (item.productId === currentItem[0].productId) {
+      if (item.productId === cart.productId) {
         item.quantity += 1;
         item.price += item.price;
         isInStorage = true;
       }
     });
-    console.log(localStor);
+
     if (isInStorage) {
       localStorage.setItem('items', JSON.stringify([...localStor]));
     } else {
-      localStorage.setItem(
-        'items',
-        JSON.stringify([...localStor, ...currentItem])
-      );
+      localStorage.setItem('items', JSON.stringify([...localStor, cart]));
     }
   }
-
-  return JSON.parse(localStorage.getItem('items')!);
-};
+}
 
 export const localStorDel = (prod: CartItems) => {
   if (localStorage.getItem('items')) {
