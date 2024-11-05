@@ -45,7 +45,7 @@ export class RegisterComponent {
       next: (response) => {
         //add shared component;
         //this.router.navigateByUrl('/email');
-        if (response.isSuccessfullRegistration) this.emailConfirm = true;
+        if (response.isSuccessfullRegistration === true) this.emailConfirm = true;
       },
       error: (err) => {
         if (err.error.errors?.Email) this.validationEmail = err.error.errors.Email;
