@@ -25,4 +25,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/cart/cart.component').then((c) => c.CartComponent),
   },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
