@@ -9,6 +9,15 @@
         <div class="container">
             <form class="register-form" #form="ngForm">
                 <input type="text" name="user" id="user" placeholder="Ім'я та прізвище" [(ngModel)]="model.firstName">
+                @if (showError) {
+                    <div class="alert">
+                        <ul>
+                            @for (error of validationUsername; track $index) {
+                                <li class="alert-danger">{{error}}</li>
+                            }
+                        </ul>
+                    </div>
+                }
 
                 <input type="email" name="email" id="email" placeholder="Електронна пошта" [(ngModel)]="model.email">
                 @if (showError) {
@@ -33,11 +42,6 @@
                 }
 
                 <button class="register" (click)="onFormSubmit()">Зареєструватися</button>
-
-                @if (emailConfirm) {
-                    <app-account-interaction [img]="{ src: 'assets/search.png', alt: 'example'}" txt="Some TEXT" />
-                }
-
             </form>
 
             <div class="check">

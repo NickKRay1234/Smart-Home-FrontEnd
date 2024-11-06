@@ -1,4 +1,4 @@
 export interface RegistrationResponse {
-    isSuccessfullRegistration: boolean;
+    isSuccessfulRegistration: boolean;
     errors?: string[];
 }

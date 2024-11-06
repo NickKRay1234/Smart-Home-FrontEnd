@@ -4,7 +4,6 @@ import { AccountService } from '../../../core/services/account.service';
 import { RegisterRequest } from '../../../shared/models/account/register-request.model';
 import { FormsModule } from '@angular/forms';
 import { AccountInteractionComponent } from '../account-interaction/account-interaction.component';
-import { log } from 'console';
 
 @Component({
   selector: 'app-register',
@@ -22,8 +21,8 @@ export class RegisterComponent {
   model: RegisterRequest;
   validationEmail?: string[];
   validationPassword?: string[];
+  validationUsername?: string[];
   showError: boolean = false;
-  emailConfirm: boolean = false;
 
   constructor() {
     const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
@@ -43,11 +42,10 @@ export class RegisterComponent {
 
     this.authService.register(this.model).subscribe({
       next: (response) => {
-        //add shared component;
-        //this.router.navigateByUrl('/email');
-        if (response.isSuccessfullRegistration === true) this.emailConfirm = true;
+        if (response.isSuccessfulRegistration === true) this.router.navigateByUrl('account/confirmEmail');
       },
       error: (err) => {
+        if (err.error.errors?.Username) this.validationUsername = err.error.errors.Username;
         if (err.error.errors?.Email) this.validationEmail = err.error.errors.Email;
         if (err.error.errors?.Password) this.validationPassword = err.error.errors.Password;
         this.showError = true;
