@@ -1,3 +1,5 @@
+@use "../../../../assets/styles/colors";
+
 .app-product-card {
   width: 100%;
 }
@@ -33,14 +35,14 @@
   font-weight: 700;
   font-family: Jura;
   line-height: 42.6px;
-  color: var(--black);
+  color: colors.$black;
 }
 
 .btn__nav__more {
   padding: 10px 20px;
   border: none;
   border-radius: 14px;
-  background: var(--white);
+  background: colors.$white;
   max-height: 44px;
   max-width: 130px;
   display: flex;
@@ -50,13 +52,13 @@
   font-family: Jura;
   font-weight: 600;
   font-size: 16px;
-  color: var(--black);
+  color: colors.$black;
   line-height: 19px;
 }
 
 .disabled {
-  background-color: var(--g4);
-  color: var(--g1);
+  background-color: colors.$g4;
+  color: colors.$g1;
 }
 
 /* medium */

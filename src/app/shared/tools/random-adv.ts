@@ -1,13 +1,11 @@
-import { Product } from '@shared/models/product/product';
+export function randomAdv<T>(products: T[]): T[] {
+  const randomProducts: T[] = [];
 
-export const randomAdv = (products: Product[]): Product[] => {
-  const randomProduct: Product[] = [];
-  console.log(products);
   for (let i = 0; i < 3; i++) {
-    const random = Math.floor(Math.random() * 3);
-    randomProduct.push(products[random]);
-    console.log(random);
+    const random = Math.floor(Math.random() * (products.length - 1));
+
+    randomProducts.push(products[random]);
   }
-  console.log(randomProduct);
-  return randomProduct;
-};
+
+  return randomProducts;
+}

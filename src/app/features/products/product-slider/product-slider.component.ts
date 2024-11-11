@@ -4,11 +4,9 @@ import {
   Inject,
   input,
   InputSignal,
-  OnChanges,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
-  SimpleChanges,
 } from '@angular/core';
 
 import { PricePipe } from '@core/pipes/price.pipe';
@@ -20,7 +18,7 @@ import { Product } from '@shared/models/product/product';
   standalone: true,
   imports: [NgClass, PricePipe],
   templateUrl: './product-slider.component.html',
-  styleUrl: './product-slider.component.css',
+  styleUrl: './product-slider.component.scss',
 })
 export class ProductSliderComponent implements OnInit, OnDestroy {
   selectedIdx!: number;

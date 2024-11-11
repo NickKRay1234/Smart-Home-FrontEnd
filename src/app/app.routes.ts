@@ -9,9 +9,17 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./components/products/product.routing').then(
+          import('./features/products/product.routing').then(
             (r) => r.PRODUCT_ROUTING
           ),
+      },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./features/cart/cart/cart.component').then(
+            (c) => c.CartComponent
+          ),
+        outlet: 'cart',
       },
     ],
   },
@@ -20,9 +28,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/account/routes').then((r) => r.accountRoutes),
   },
-  {
-    path: 'cart',
-    loadComponent: () =>
-      import('./components/cart/cart.component').then((c) => c.CartComponent),
-  },
+
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];

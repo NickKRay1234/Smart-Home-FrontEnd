@@ -18,6 +18,7 @@ export class ErrorHandlerService {
         message: error.error.title ? error.error.title : operation,
         status: 'warn',
       });
+
       console.error(error.error.title);
       console.error(error.error.errors.id[0]);
       return of(result as T);

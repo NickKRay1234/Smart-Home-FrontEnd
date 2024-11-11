@@ -42,7 +42,10 @@
     <a href="#" class="icon-buttons circle-button">
       <img src="assets/images/png/search.png" alt="Search" />
     </a>
-    <a routerLink="/cart" class="icon-buttons circle-button">
+    <a
+      [routerLink]="[{ outlets: { cart: ['cart'] } }]"
+      class="icon-buttons circle-button"
+    >
       <app-svg-icon class="cart-icon" [path]="'assets/images/svg/cart.svg'" />
     </a>
   </div>
