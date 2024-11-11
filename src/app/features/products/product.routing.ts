@@ -7,9 +7,4 @@ export const PRODUCT_ROUTING: Route[] = [
       import('./products/products.component').then((c) => c.ProductsComponent),
   },
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  {
-    path: 'cart',
-    loadComponent: () =>
-      import('../cart/cart.component').then((c) => c.CartComponent),
-  },
 ];

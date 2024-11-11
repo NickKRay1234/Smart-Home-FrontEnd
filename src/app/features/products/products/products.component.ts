@@ -13,19 +13,12 @@ import { ProductService } from '@core/services/product.service';
 import { ProductSliderComponent } from '../product-slider/product-slider.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { Product } from '@shared/models/product/product';
-import { CartComponent } from '../../cart/cart.component';
 import { resize } from '@shared/tools/resize';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [
-    ProductSliderComponent,
-    ProductCardComponent,
-    NgClass,
-    AsyncPipe,
-    CartComponent,
-  ],
+  imports: [ProductSliderComponent, ProductCardComponent, NgClass, AsyncPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
   providers: [ProductService],

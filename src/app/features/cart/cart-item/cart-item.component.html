@@ -1,0 +1,33 @@
+<section class="cart__item">
+  @if (cart()) {
+  <div class="cart__image">
+    <img [src]="cart()?.pictureUrl" alt="" />
+  </div>
+  <div class="cart__info">
+    <div class="cart__title">
+      <h6>
+        Розумний дверний замок Aqara Smart Door Lock N 100 ZNMS16LM(EU version)
+      </h6>
+      <app-svg-icon [path]="iconDelete" (click)="deleteItem(cart()?.productId)">
+      </app-svg-icon>
+    </div>
+
+    <div class="cart__count">
+      <div class="cart__quantity">
+        <app-svg-icon
+          [path]="iconMinus"
+          (click)="decrease(cart()?.productId)"
+        ></app-svg-icon>
+        <h4>{{ cart()?.quantity }}</h4>
+        <app-svg-icon
+          [path]="iconPlus"
+          (click)="increase(cart()?.productId)"
+        ></app-svg-icon>
+      </div>
+      <div class="cart__price">
+        <h4>{{ cart()?.price | price }} &#8372;</h4>
+      </div>
+    </div>
+  </div>
+  }
+</section>

@@ -16,7 +16,7 @@ import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component
 import { PricePipe } from '@core/pipes/price.pipe';
 import { CartService } from '@core/services/cart.service';
 import { postCartReq } from '@shared/tools/post-cart-req';
-import { CartStoreService } from '@core/services/cart-store.service';
+import { CartStorageService } from '@core/services/cart-storage.service';
 
 @Component({
   selector: 'app-product-card',
@@ -30,8 +30,8 @@ export class ProductCardComponent implements OnChanges {
   productsInput: InputSignal<Product[]> = input.required();
 
   private cartService = inject(CartService);
+  private cartStorage = inject(CartStorageService);
   private destroyRef = inject(DestroyRef);
-  private cartStore = inject(CartStoreService);
 
   products: Product[] = [];
   currentImage = 0;
@@ -86,19 +86,10 @@ export class ProductCardComponent implements OnChanges {
   }
 
   addToCart(idx: number): void {
-    const { productId, productName, productPrice, images } = this.products[idx];
-    this.cartStore.updateItems(
-      {
-        productId,
-        price: productPrice,
-        quantity: 1,
-        productName,
-        pictureUrl: images[0].imageUrl,
-      },
-      'add'
-    );
+    this.cartStorage.updateCartStorage(this.products[idx]);
+
     this.cartService
-      .addToCart(postCartReq(this.cartStore.getCartItems()))
+      .addToCart(postCartReq(this.cartStorage.getCartStorage()))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

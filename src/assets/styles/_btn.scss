@@ -44,6 +44,17 @@
     color: #91a0a5;
   }
 
+  &__active {
+    @extend .btn__primary;
+
+    background-image: linear-gradient(to left, #fafe0f, colors.$gr2);
+
+    &:active {
+      border: none;
+      background-image: linear-gradient(to right, #fafe0f, colors.$gr2);
+    }
+  }
+
   &__secondary {
     //styleName: button txt M D;
     font-family: Tenor Sans;
