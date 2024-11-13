@@ -1,0 +1,68 @@
+@use "../../assets/styles/colors";
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  width: 50%;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  z-index: 10;
+  text-align: center;
+  padding: 24px 50px;
+  transform: translate(50%, 50%);
+  border-radius: 20px;
+}
+
+.icon__close {
+  padding-left: 20px;
+  align-self: flex-start;
+}
+
+app-svg-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.success {
+  background: rgba($color: colors.$gr2, $alpha: 0.8);
+}
+
+.warn {
+  background: rgba($color: colors.$p4, $alpha: 0.8);
+}
+
+.danger {
+  background: rgba($color: colors.$r1, $alpha: 0.8);
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  width: 100%;
+  padding: 0 40px;
+}
+
+/* medium */
+@media (max-width: 1280px) {
+  .container {
+    padding: 0 22px;
+  }
+}
+/* small */
+@media (max-width: 744px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+/* extra small */
+@media (max-width: 424px) {
+  .container {
+    padding: 0 10px;
+  }
+}

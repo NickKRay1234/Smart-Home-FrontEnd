@@ -17,6 +17,8 @@ import { PricePipe } from '@core/pipes/price.pipe';
 import { CartService } from '@core/services/cart.service';
 import { postCartReq } from '@shared/tools/post-cart-req';
 import { CartStorageService } from '@core/services/cart-storage.service';
+import { tap } from 'rxjs';
+import { AlertService } from '@core/services/alert.service';
 
 @Component({
   selector: 'app-product-card',
@@ -32,6 +34,7 @@ export class ProductCardComponent implements OnChanges {
   private cartService = inject(CartService);
   private cartStorage = inject(CartStorageService);
   private destroyRef = inject(DestroyRef);
+  private alertService = inject(AlertService);
 
   products: Product[] = [];
   currentImage = 0;
@@ -90,7 +93,23 @@ export class ProductCardComponent implements OnChanges {
 
     this.cartService
       .addToCart(postCartReq(this.cartStorage.getCartStorage()))
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((res) => {
+          if (res.items.length) {
+            this.alertService.setAlert({
+              message: 'Товар додано до кошика',
+              status: 'success',
+            });
+            if (!res.items.length) {
+              this.alertService.setAlert({
+                message: 'Сталася помилка',
+                status: 'danger',
+              });
+            }
+          }
+        })
+      )
       .subscribe();
   }
 }

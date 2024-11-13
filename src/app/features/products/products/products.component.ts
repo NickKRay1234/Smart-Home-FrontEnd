@@ -14,6 +14,7 @@ import { ProductSliderComponent } from '../product-slider/product-slider.compone
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { Product } from '@shared/models/product/product';
 import { resize } from '@shared/tools/resize';
+import { ProductStorageService } from '@core/services/product-storage.service';
 
 @Component({
   selector: 'app-products',
@@ -27,6 +28,7 @@ export class ProductsComponent implements OnInit {
   private productService = inject(ProductService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
+  private productStorage = inject(ProductStorageService);
 
   discountProducts: Product[] = [];
   newProducts: Product[] = [];
@@ -52,6 +54,11 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.productService
+      .getAllProducts()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((prod) => this.productStorage.setProductStorage(prod));
+
     this.productService
       .getProducts()
       .pipe(takeUntilDestroyed(this.destroyRef))

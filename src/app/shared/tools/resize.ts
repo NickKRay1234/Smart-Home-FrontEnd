@@ -1,6 +1,6 @@
 const brakePoints = {
-  medium: 1280,
-  small: 744,
+  medium: 1279,
+  small: 743,
 };
 
 export const resize = <T>(prod: T[], width: number): T[] => {

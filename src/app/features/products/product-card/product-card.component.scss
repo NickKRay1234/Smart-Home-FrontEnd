@@ -1,4 +1,5 @@
 @use "../../../../assets/styles/colors";
+@use "../../../../assets/styles/breakpoint" as point;
 
 .product__card {
   display: flex;
@@ -175,7 +176,7 @@ svg {
   text-align: right;
 }
 /* medium */
-@media (max-width: 1280px) {
+@include point.breakpoint(medium) {
   .product__card:first-child {
     padding-left: 12px;
   }
@@ -184,7 +185,7 @@ svg {
   }
 }
 /* small */
-@media (max-width: 744px) {
+@include point.breakpoint(small) {
   .product__item {
     max-width: 180px;
     min-width: 142px;
@@ -236,7 +237,7 @@ svg {
   }
 }
 /* extra small */
-@media (max-width: 424px) {
+@include point.breakpoint("extra-small") {
   .product__item {
     max-width: 260px;
     min-width: 142px;

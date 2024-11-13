@@ -7,20 +7,21 @@ import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive,SvgIconComponent],
+  imports: [RouterLink, RouterLinkActive, SvgIconComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private _ngZone: NgZone) {}
   user?: User;
+  iconLogo = 'assets/images/svg/logo.svg';
+  iconUser = 'assets/images/png/user.png';
 
   ngOnInit(): void {
     this.authService.user().subscribe({
       next: (response) => {
         this.user = response;
-      }
+      },
     });
 
     this.user = this.authService.retrieveStorageUser();
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout();
     this._ngZone.run(() => {
-      this.router.navigate(['/']).then(() => window.location.reload())
-    })
+      this.router.navigate(['/']).then(() => window.location.reload());
+    });
   }
 }

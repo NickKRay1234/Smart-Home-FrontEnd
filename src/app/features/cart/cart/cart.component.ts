@@ -33,7 +33,6 @@ export class CartComponent implements OnInit {
       .getCart()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((cart) => {
-        console.log(cart.items);
         this.cartStorage.setCartStorage(cart.items);
         this.carts = this.cartStorage.getCartStorage();
         this.cartStorage.countTotal(this.carts);
@@ -55,4 +54,6 @@ export class CartComponent implements OnInit {
   close() {
     this.router.navigate([{ outlets: { cart: null } }]);
   }
+
+  makeOrder() {}
 }
