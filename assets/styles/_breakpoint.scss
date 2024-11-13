@@ -1,0 +1,13 @@
+@use "calc";
+
+$breakpoints: (
+  "medium": calc.em(1279),
+  "small": calc.em(743),
+  "extra-small": calc.em(423),
+);
+
+@mixin breakpoint($size) {
+  @media (max-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
