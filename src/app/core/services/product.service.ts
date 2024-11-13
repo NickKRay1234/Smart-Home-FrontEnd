@@ -19,6 +19,19 @@ export class ProductService {
     );
   }
 
+  getAllProducts(): Observable<Product[]> {
+    return this.http
+      .get<ProductRes>(`${environment.apiUrl}Products?PageSize=50`)
+      .pipe(
+        map((product: ProductRes) => product.data),
+        catchError(
+          this.errorHandler.handleError<Product[]>(
+            'Помилка отримання продуктів!'
+          )
+        )
+      );
+  }
+
   getDiscountProducts(): Observable<Product[]> {
     return this.http
       .get<ProductRes>(`${environment.apiUrl}Products?Sort=saleDesc`)

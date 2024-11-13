@@ -2,7 +2,7 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 
 interface Alert {
   message: string;
-  status: 'success' | 'warn' | null;
+  status: 'success' | 'warn' | 'danger' | null;
 }
 @Injectable({
   providedIn: 'root',

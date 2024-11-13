@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { catchError, map, Observable, tap } from 'rxjs';
 import { ErrorHandlerService } from './error-handler.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class CartService {
@@ -12,6 +13,7 @@ export class CartService {
   private httpClient = inject(HttpClient);
   private errorHandler = inject(ErrorHandlerService);
   private destroyRef = inject(DestroyRef);
+  private alertService = inject(AlertService);
 
   getCart(): Observable<Cart> {
     return this.httpClient

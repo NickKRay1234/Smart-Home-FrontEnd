@@ -1,7 +1,10 @@
 <div class="center">
-  @if (alert.getAlert()) {
-  <div class="alert">
-    {{ alert.getAlert().message }}
+  @if (alert.getAlert().message) {
+  <div class="alert" [ngClass]="alert.getAlert().status">
+    <p>{{ alert.getAlert().message }}</p>
+    <div class="icon__close" (click)="close()">
+      <app-svg-icon [path]="iconClose"></app-svg-icon>
+    </div>
   </div>
   }
   <app-header />

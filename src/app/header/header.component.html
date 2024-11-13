@@ -1,26 +1,30 @@
 <header>
   <div class="container">
-    <a href="#">
-      <img src="assets/images/svg/logo.svg" alt="Logo" />
+    <a routerLink="/" class="logo__link">
+      <app-svg-icon [path]="iconLogo"></app-svg-icon>
     </a>
     <nav class="navigation">
       <ul>
-        <li><a href="#">Гарантія</a></li>
-        <li><a href="#">Обмін</a></li>
-        <li><a href="#">Новини</a></li>
-        <li><a href="#">Служба Підтримки</a></li>
-        <li><a href="#">Блог</a></li>
+        <li><a routerLink="/" routerLinkActive="active">Гарантія</a></li>
+        <li><a routerLink="/" routerLinkActive="active">Обмін</a></li>
+        <li><a routerLink="/" routerLinkActive="active">Новини</a></li>
+        <li>
+          <a routerLink="/" routerLinkActive="active">Служба Підтримки</a>
+        </li>
+        <li><a routerLink="/" routerLinkActive="active">Блог</a></li>
       </ul>
     </nav>
-    <div class="user">
-      <div class="login">
-        @if (user === undefined) {
-        <a class="login" routerLink="account/login">Увійти</a>
-        } @else {
-        <span>{{ user.firstName }}</span>
-        }
-        <img src="assets/images/png/user.png" alt="User icon" />
-      </div>
+
+    <div class="login">
+      @if (user === undefined) {
+      <button class="btn btn__active" routerLink="account/login">
+        Увійти
+        <app-svg-icon [path]="iconUser"></app-svg-icon>
+      </button>
+      } @else {
+      <span>{{ user.firstName }}</span>
+      <app-svg-icon [path]="iconUser"></app-svg-icon>
+      }
     </div>
   </div>
 </header>

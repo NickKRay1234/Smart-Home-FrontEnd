@@ -1,6 +1,8 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { CartItems } from '@shared/models/product/cart';
 import { Product } from '@shared/models/product/product';
+import { ProductStorageService } from './product-storage.service';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +10,8 @@ import { Product } from '@shared/models/product/product';
 export class CartStorageService {
   private cartStorage: WritableSignal<CartItems[]> = signal<CartItems[]>([]);
   private total = signal(0);
+  private productStorage = inject(ProductStorageService);
+  private alertService = inject(AlertService);
 
   getCartStorage(): CartItems[] {
     return this.cartStorage();
@@ -61,12 +65,24 @@ export class CartStorageService {
   }
 
   increaseCartStorage(productId: number) {
+    const inStock = this.productStorage
+      .getProductsStorage()
+      .find((prod) => prod.productId === productId)?.quantityInStock;
+
     this.cartStorage.update((items: CartItems[]) => {
       items.forEach((item) => {
-        if (item.productId === productId) {
-          const price = item.price / item.quantity;
-          item.quantity += 1;
-          item.price = item.quantity * price;
+        if (inStock && inStock <= item.quantity) {
+          this.alertService.setAlert({
+            message: 'Досягнуто максимальної кількості',
+            status: 'warn',
+          });
+        }
+        if (inStock && inStock > item.quantity) {
+          if (item.productId === productId) {
+            const price = item.price / item.quantity;
+            item.quantity += 1;
+            item.price = item.quantity * price;
+          }
         }
       });
       this.countTotal(this.cartStorage());

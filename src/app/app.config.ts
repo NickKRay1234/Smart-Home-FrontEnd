@@ -15,6 +15,7 @@ import {
 } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { provideNgxWebstorage, withSessionStorage } from 'ngx-webstorage';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +27,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
-    provideNgxWebstorage(withSessionStorage()),
+    provideNgxWebstorage(withSessionStorage()), provideAnimationsAsync(),
   ],
 };
