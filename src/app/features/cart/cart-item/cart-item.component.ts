@@ -1,15 +1,8 @@
-import {
-  Component,
-  inject,
-  input,
-  InputSignal,
-  OnChanges,
-  output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, inject, input, InputSignal, output } from '@angular/core';
 import { PricePipe } from '@core/pipes/price.pipe';
 import { CartStorageService } from '@core/services/cart-storage.service';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
+import { icons } from '@shared/configs/icons';
 import { CartItems } from '@shared/models/product/cart';
 
 @Component({
@@ -25,9 +18,7 @@ export class CartItemComponent {
 
   private cartStorage = inject(CartStorageService);
 
-  iconDelete = 'assets/images/svg/tabler-icon-trash.svg';
-  iconPlus = 'assets/images/svg/tabler-icon-plus.svg';
-  iconMinus = 'assets/images/svg/tabler-icon-minus.svg';
+  icons = icons;
 
   deleteItem(prodId: number | undefined) {
     if (prodId) {

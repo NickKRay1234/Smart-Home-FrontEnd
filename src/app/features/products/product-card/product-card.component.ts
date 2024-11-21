@@ -19,6 +19,7 @@ import { postCartReq } from '@shared/tools/post-cart-req';
 import { CartStorageService } from '@core/services/cart-storage.service';
 import { tap } from 'rxjs';
 import { AlertService } from '@core/services/alert.service';
+import { icons } from '@shared/configs/icons';
 
 @Component({
   selector: 'app-product-card',
@@ -40,8 +41,7 @@ export class ProductCardComponent implements OnChanges {
   currentImage = 0;
   currentIdx: number | null = null;
   heart = 'assets/images/svg/heart.svg';
-  arrowLeft = 'assets/images/svg/left-arrow.svg';
-  arrowRight = 'assets/images/svg/right-arrow.svg';
+  icons = icons;
   stars = [
     'assets/images/svg/star-fill.svg',
     'assets/images/svg/star-fill.svg',

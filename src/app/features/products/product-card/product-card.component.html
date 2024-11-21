@@ -45,17 +45,12 @@
             </linearGradient>
           </defs>
         </svg>
-        <!-- <app-svg-icon
-          [path]="
-            product.favorite ? 'assets/images/svg/heart-active.svg' : heart
-          "
-        /> -->
       </div>
       <div class="arrow__left" (click)="slideLeft($index)">
-        <app-svg-icon [path]="arrowLeft" />
+        <app-svg-icon [path]="icons['arrowLeft']" />
       </div>
       <div class="arrow__right" (click)="slideRight($index)">
-        <app-svg-icon [path]="arrowRight" />
+        <app-svg-icon [path]="icons['arrowRight']" />
       </div>
     </div>
     <p class="product__name">

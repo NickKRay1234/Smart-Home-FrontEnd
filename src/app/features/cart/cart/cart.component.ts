@@ -1,14 +1,16 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { CartItemComponent } from '../cart-item/cart-item.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+
 import { CartService } from '@core/services/cart.service';
 import { CartItems } from '@shared/models/product/cart';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CartItemComponent } from '../cart-item/cart-item.component';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
-import { Router } from '@angular/router';
 import { PricePipe } from '@core/pipes/price.pipe';
 import { CartEmptyComponent } from '../cart-empty/cart-empty.component';
 import { CartStorageService } from '@core/services/cart-storage.service';
 import { postCartReq } from '@shared/tools/post-cart-req';
+import { icons } from '@shared/configs/icons';
 
 @Component({
   selector: 'app-cart',
@@ -23,7 +25,7 @@ export class CartComponent implements OnInit {
   private cartStorage = inject(CartStorageService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
-  iconClose = './assets/images/svg/tabler-icon-x.svg';
+  icons = icons;
 
   carts: CartItems[] = [];
   total = 0;

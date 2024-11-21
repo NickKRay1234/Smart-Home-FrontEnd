@@ -1,20 +1,19 @@
 import { Component, effect, inject, OnDestroy } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
-import { AlertService } from '@core/services/alert.service';
 import { NgClass } from '@angular/common';
-import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
+
+import { HeaderComponent } from '../header/header.component';
+import { AlertService } from '@core/services/alert.service';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [HeaderComponent, RouterOutlet, NgClass, SvgIconComponent],
+  imports: [HeaderComponent, RouterOutlet, NgClass],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
 export class AppLayoutComponent implements OnDestroy {
   alert = inject(AlertService);
-  iconClose = 'assets/images/svg/tabler-icon-x.svg';
   private timeoutId!: ReturnType<typeof setTimeout>;
 
   constructor() {
