@@ -1,9 +1,37 @@
 <div class="center">
   @if (alert.getAlert().message) {
   <div class="alert" [ngClass]="alert.getAlert().status">
+    <p class="alert__status__icon">
+      @if (alert.getAlert().status == 'warn') {
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <use xlink:href="assets/images/svg/sprite.svg#errorAlert"></use>
+      </svg>
+      } @else if(alert.getAlert().status == 'success') {
+      <svg
+        width="20"
+        height="12"
+        viewBox="0 0 20 12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <use xlink:href="assets/images/svg/sprite.svg#successAlert"></use>
+      </svg>
+      }
+    </p>
     <p>{{ alert.getAlert().message }}</p>
     <div class="icon__close" (click)="close()">
-      <app-svg-icon [path]="iconClose"></app-svg-icon>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <use xlink:href="assets/images/svg/sprite.svg#closeIcon"></use>
+      </svg>
     </div>
   </div>
   }

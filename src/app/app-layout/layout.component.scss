@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  width: 50%;
+  width: 520px;
   top: 0;
   left: 0;
   font-size: 16px;
@@ -19,6 +19,7 @@
 .icon__close {
   padding-left: 20px;
   align-self: flex-start;
+  cursor: pointer;
 }
 
 app-svg-icon {

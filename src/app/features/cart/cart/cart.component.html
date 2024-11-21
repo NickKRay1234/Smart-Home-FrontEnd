@@ -1,7 +1,7 @@
 <section class="cart__container">
   <div class="cart__header">
     <h1>Кошик</h1>
-    <app-svg-icon [path]="iconClose" (click)="close()"></app-svg-icon>
+    <app-svg-icon [path]="icons['close']" (click)="close()"></app-svg-icon>
   </div>
   @if (carts.length) {
   <div class="cart__content">

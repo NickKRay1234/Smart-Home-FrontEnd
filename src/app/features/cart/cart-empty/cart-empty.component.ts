@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
+import { icons } from '@shared/configs/icons';
 
 @Component({
   selector: 'app-cart-empty',
@@ -11,7 +12,7 @@ import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component
 })
 export class CartEmptyComponent {
   private router = inject(Router);
-  iconCrying = 'assets/images/svg/iconCryingFace.svg';
+  icons = icons;
 
   close() {
     this.router.navigate([{ outlets: { cart: null } }]);

@@ -1,21 +1,32 @@
-import { Component, inject, NgZone, OnInit } from '@angular/core';
+import { Component, HostListener, inject, NgZone, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 import { AccountService } from '../core/services/account.service';
 import { User } from '../shared/models/account/user';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
+import { icons } from '../shared/configs/icons';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, SvgIconComponent],
+  imports: [RouterLink, RouterLinkActive, SvgIconComponent, FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
   constructor(private _ngZone: NgZone) {}
   user?: User;
-  iconLogo = 'assets/images/svg/logo.svg';
-  iconUser = 'assets/images/png/user.png';
+  icons = icons;
+  activeSearch = false;
+  inputSearch = '';
+
+  @HostListener('click', ['$event.target']) onClick(event: HTMLElement) {
+    const values = Object.values(event.classList);
+    if (values.includes('input__search')) {
+      this.activeSearch = true;
+    }
+  }
 
   ngOnInit(): void {
     this.authService.user().subscribe({
@@ -35,5 +46,13 @@ export class HeaderComponent implements OnInit {
     this._ngZone.run(() => {
       this.router.navigate(['/']).then(() => window.location.reload());
     });
+  }
+
+  search() {
+    this.activeSearch = !this.activeSearch;
+    if (this.inputSearch) {
+      console.log(this.inputSearch);
+      this.inputSearch = '';
+    }
   }
 }

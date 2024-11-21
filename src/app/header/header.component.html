@@ -1,17 +1,33 @@
 <header>
   <div class="container">
     <a routerLink="/" class="logo__link">
-      <app-svg-icon [path]="iconLogo"></app-svg-icon>
+      <app-svg-icon [path]="icons['logo']"></app-svg-icon>
     </a>
     <nav class="navigation">
       <ul>
-        <li><a routerLink="/" routerLinkActive="active">Гарантія</a></li>
-        <li><a routerLink="/" routerLinkActive="active">Обмін</a></li>
-        <li><a routerLink="/" routerLinkActive="active">Новини</a></li>
         <li>
-          <a routerLink="/" routerLinkActive="active">Служба Підтримки</a>
+          <a class="nav__link" routerLink="/" routerLinkActive="active"
+            >Обмін</a
+          >
         </li>
-        <li><a routerLink="/" routerLinkActive="active">Блог</a></li>
+        <li>
+          <a class="nav__link" routerLink="/" routerLinkActive="active"
+            >Гарантія</a
+          >
+        </li>
+        <li>
+          <a class="nav__link" routerLink="/" routerLinkActive="active"
+            >Новини</a
+          >
+        </li>
+        <li>
+          <a class="nav__link" routerLink="/" routerLinkActive="active"
+            >Служба Підтримки</a
+          >
+        </li>
+        <li>
+          <a class="nav__link" routerLink="/" routerLinkActive="active">Блог</a>
+        </li>
       </ul>
     </nav>
 
@@ -19,11 +35,11 @@
       @if (user === undefined) {
       <button class="btn btn__active" routerLink="account/login">
         Увійти
-        <app-svg-icon [path]="iconUser"></app-svg-icon>
+        <app-svg-icon [path]="icons['user']"></app-svg-icon>
       </button>
       } @else {
       <span>{{ user.firstName }}</span>
-      <app-svg-icon [path]="iconUser"></app-svg-icon>
+      <app-svg-icon [path]="icons['user']"></app-svg-icon>
       }
     </div>
   </div>
@@ -37,20 +53,32 @@
   </button>
 
   <div class="icon-buttons">
+    <div class="icon-buttons icon__search__btn" (click)="search()">
+      <div class="input__item">
+        @if (activeSearch) {
+
+        <input
+          type="text"
+          class="input__search"
+          [(ngModel)]="inputSearch"
+          (keydown.enter)="search()"
+        />
+
+        }
+        <app-svg-icon [path]="icons['search']" class="icon__search" />
+      </div>
+    </div>
     <a href="#" class="icon-buttons circle-button">
-      <img src="assets/images/png/search.png" alt="Search" />
+      <app-svg-icon [path]="icons['balance']" />
     </a>
     <a href="#" class="icon-buttons circle-button">
-      <img src="assets/images/png/compare.png" alt="Compare" />
-    </a>
-    <a href="#" class="icon-buttons circle-button">
-      <img src="assets/images/png/search.png" alt="Search" />
+      <app-svg-icon [path]="icons['heart']" />
     </a>
     <a
       [routerLink]="[{ outlets: { cart: ['cart'] } }]"
       class="icon-buttons circle-button"
     >
-      <app-svg-icon class="cart-icon" [path]="'assets/images/svg/cart.svg'" />
+      <app-svg-icon class="cart-icon" [path]="icons['cart']" />
     </a>
   </div>
 </div>

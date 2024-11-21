@@ -71,7 +71,11 @@ export class CartStorageService {
 
     this.cartStorage.update((items: CartItems[]) => {
       items.forEach((item) => {
-        if (inStock && inStock <= item.quantity) {
+        if (
+          inStock &&
+          inStock <= item.quantity &&
+          productId === item.productId
+        ) {
           this.alertService.setAlert({
             message: 'Досягнуто максимальної кількості',
             status: 'warn',
