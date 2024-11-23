@@ -238,8 +238,12 @@ svg {
 /* extra small */
 @include point.breakpoint("extra-small") {
   .product__item {
-    width: 260px;
+    width: 142px;
     padding: 10px;
+  }
+
+  .product__likes {
+    padding-left: 10px;
   }
 
   .product__item-image {
@@ -247,7 +251,7 @@ svg {
   }
 
   .product__price {
-    width: 260px;
+    // width: 260px;
     padding: 10px;
   }
 
