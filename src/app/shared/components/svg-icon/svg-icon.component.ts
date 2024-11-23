@@ -8,7 +8,7 @@ import { Component, HostBinding, HostListener, Input } from '@angular/core';
   styleUrl: './svg-icon.component.css',
 })
 export class SvgIconComponent {
-  @HostBinding('style.-webkit-mask-image')
+  @HostBinding('style.mask-image')
   private _path!: string;
 
   @HostBinding('attr.fill') private _fill = '';
