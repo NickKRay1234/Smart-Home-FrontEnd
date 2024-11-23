@@ -6,11 +6,18 @@ import { AccountService } from '../core/services/account.service';
 import { User } from '../shared/models/account/user';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
 import { icons } from '../shared/configs/icons';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, SvgIconComponent, FormsModule],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    SvgIconComponent,
+    FormsModule,
+    NgClass,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -20,6 +27,7 @@ export class HeaderComponent implements OnInit {
   icons = icons;
   activeSearch = false;
   inputSearch = '';
+  isCollapsed = false;
 
   @HostListener('click', ['$event.target']) onClick(event: HTMLElement) {
     const values = Object.values(event.classList);
@@ -54,5 +62,9 @@ export class HeaderComponent implements OnInit {
       console.log(this.inputSearch);
       this.inputSearch = '';
     }
+  }
+
+  toggleNav() {
+    this.isCollapsed = !this.isCollapsed;
   }
 }

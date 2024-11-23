@@ -3,29 +3,32 @@
     <a routerLink="/" class="logo__link">
       <app-svg-icon [path]="icons['logo']"></app-svg-icon>
     </a>
-    <nav class="navigation">
-      <ul>
-        <li>
+    <nav class="navigation" [ngClass]="{ collapsed: isCollapsed }">
+      <div class="nav__icon__collapse">
+        <app-svg-icon [path]="icons['iconMenu']" (click)="toggleNav()" />
+      </div>
+      <ul class="nav__items">
+        <li class="nav__item">
           <a class="nav__link" routerLink="/" routerLinkActive="active"
             >Обмін</a
           >
         </li>
-        <li>
+        <li class="nav__item">
           <a class="nav__link" routerLink="/" routerLinkActive="active"
             >Гарантія</a
           >
         </li>
-        <li>
+        <li class="nav__item">
           <a class="nav__link" routerLink="/" routerLinkActive="active"
             >Новини</a
           >
         </li>
-        <li>
+        <li class="nav__item">
           <a class="nav__link" routerLink="/" routerLinkActive="active"
             >Служба Підтримки</a
           >
         </li>
-        <li>
+        <li class="nav__item">
           <a class="nav__link" routerLink="/" routerLinkActive="active">Блог</a>
         </li>
       </ul>

@@ -17,4 +17,5 @@ export const icons: Icons = {
   arrowRight: 'assets/images/svg/right-arrow.svg',
   successAlert: 'assets/images/svg/success_alert.svg',
   errorAlert: 'assets/images/svg/error_alert.svg',
+  iconMenu: 'assets/images/svg/icon_menu.svg',
 };
