@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
 import { CartService } from '@core/services/cart.service';
-import { CartItems } from '@shared/models/product/cart';
+import { Cart, CartItems } from '@shared/models/product/cart';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
 import { PricePipe } from '@core/pipes/price.pipe';
@@ -11,6 +11,7 @@ import { CartEmptyComponent } from '../cart-empty/cart-empty.component';
 import { CartStorageService } from '@core/services/cart-storage.service';
 import { postCartReq } from '@shared/tools/post-cart-req';
 import { icons } from '@shared/configs/icons';
+import { CheckoutService } from '@core/services/checkout.service';
 
 @Component({
   selector: 'app-cart',
@@ -23,8 +24,10 @@ import { icons } from '@shared/configs/icons';
 export class CartComponent implements OnInit {
   private cartService = inject(CartService);
   private cartStorage = inject(CartStorageService);
+  private checkOutService = inject(CheckoutService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
+  private cart!: Cart;
   icons = icons;
 
   carts: CartItems[] = [];
@@ -35,6 +38,7 @@ export class CartComponent implements OnInit {
       .getCart()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((cart) => {
+        this.cart = cart;
         this.cartStorage.setCartStorage(cart.items);
         this.carts = this.cartStorage.getCartStorage();
         this.cartStorage.countTotal(this.carts);
@@ -57,5 +61,8 @@ export class CartComponent implements OnInit {
     this.router.navigate([{ outlets: { cart: null } }]);
   }
 
-  makeOrder() {}
+  makeOrder() {
+    console.log(this.cart);
+    this.checkOutService.checkOut(this.cart);
+  }
 }
