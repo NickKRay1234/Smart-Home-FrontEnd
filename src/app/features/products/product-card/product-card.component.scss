@@ -187,8 +187,7 @@ svg {
 /* small */
 @include point.breakpoint(small) {
   .product__item {
-    max-width: 180px;
-    min-width: 142px;
+    width: 180px;
   }
 
   .product__item-image {
@@ -239,8 +238,7 @@ svg {
 /* extra small */
 @include point.breakpoint("extra-small") {
   .product__item {
-    max-width: 260px;
-    min-width: 142px;
+    width: 260px;
     padding: 10px;
   }
 
@@ -249,8 +247,7 @@ svg {
   }
 
   .product__price {
-    max-width: 260px;
-    min-width: 142px;
+    width: 260px;
     padding: 10px;
   }
 
