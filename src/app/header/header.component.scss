@@ -246,3 +246,13 @@ input {
     }
   }
 }
+
+@include point.breakpoint(small) {
+  .input__item {
+    right: 40%;
+  }
+
+  .navigation {
+    left: 20%;
+  }
+}
