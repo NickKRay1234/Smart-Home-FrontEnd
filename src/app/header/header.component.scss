@@ -146,6 +146,7 @@ header {
     padding: 10px 20px;
     background: colors.$white;
     gap: 20px;
+    transition: width 0.5s ease;
   }
 }
 

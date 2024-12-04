@@ -26,6 +26,7 @@ export class ProductSliderComponent implements OnInit, OnDestroy {
   private timerId!: ReturnType<typeof setInterval>;
   private isBrowser!: boolean;
   products: InputSignal<Product[]> = input<Product[]>([]);
+  delay = 3000;
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -44,7 +45,7 @@ export class ProductSliderComponent implements OnInit, OnDestroy {
     this.timerId = setInterval(
       () =>
         (this.selectedIdx = (this.selectedIdx + 1) % this.advProducts.length),
-      3000
+      this.delay
     );
   }
 
@@ -59,6 +60,6 @@ export class ProductSliderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.stopAutoPlay();
+    if (this.timerId) this.stopAutoPlay();
   }
 }
