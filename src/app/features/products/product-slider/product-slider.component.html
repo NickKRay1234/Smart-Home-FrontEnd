@@ -2,6 +2,7 @@
   <div class="slider" (mouseenter)="stopAutoPlay()" (mouseleave)="autoPlay()">
     <div class="slider__wrapper">
       @if (advProducts[selectedIdx]) {
+
       <div class="slider__content">
         <h1>{{ advProducts[selectedIdx].productName }}</h1>
         <p class="price__percent-disc">
